@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 public class Main {
+    private static int sTimeout  = 5; //timeout in sec for wait
 
     public static void main(String[] args) {
         //System.out.println("Hello World!");
@@ -24,6 +25,7 @@ public class Main {
         String mainUrl = "https://secure.bid4assets.com/mvc/storefront/KingWASept18";
         String pathToPlus = "/html/body/div[1]/div[1]/div[1]/div[2]/div[5]/div[1]/h4/a";
         String pathToAucs = "//*[@id=\"folderListView\"]/div";
+        String pathToLots = "//*/table/tbody/tr";
        // FirefoxProfile firefoxProfile = new FirefoxProfile();
        // firefoxProfile.setPreference("browser.private.browsing.autostart",true);
        // FirefoxOptions opt = new FirefoxOptions();
@@ -35,11 +37,17 @@ public class Main {
         //click on some auction
         WebElement plus = driver.findElement(By.xpath("/html/body/div[1]/div[1]/div[1]/div[2]/div[5]/div[1]/h4/a"));
         plus.click();
-        List<WebElement>  aaa= getAucs(driver, mainUrl, pathToPlus, pathToAucs);
+        List<WebElement>  auctions= getAucs(driver, mainUrl, pathToPlus, pathToAucs);
+        WebElement auction = auctions.get(0);
+       //TODO add wait?
+        auction.click();
+        List<WebElement> lots = getLots(driver, auction, pathToLots);
+
+      //  aucs.get(0).findElement(By.xpath());
        // WebDriverWait wait = new WebDriverWait(driver, 5);
       //  wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(".//*[@onclick=\"loadAuctionsForCollection(2881,10)\"]"))));
-        WebElement auc = driver.findElement(By.xpath(".//*[@onclick=\"loadAuctionsForCollection(2881,10)\"]"));
-        auc.click();
+      //  WebElement auc = driver.findElement(By.xpath(".//*[@onclick=\"loadAuctionsForCollection(2881,10)\"]"));
+      //  auc.click();
 
         List els =  driver.findElements(By.xpath(".//*[@id=\"collapseFive\"]/div/div/div"));
         List els2 =  driver.findElements(By.xpath(".//*[@id=\"auctionGrid-2881\"]/table/tbody/tr[2]/td[3]/a"));
@@ -59,19 +67,35 @@ public class Main {
        // driver.find_element_by_xpath("//button[@class='btn btn-primary' and @id='YesBtn'][@onclick=\"check_security('wlan1security_div0')\"]").click();
     }
     //returns a list of auctions
+    private static void waitUntilLoad(WebDriver myDriver, String myPath){
+        WebDriverWait wait = new WebDriverWait(myDriver, sTimeout);
+        wait.until(ExpectedConditions.visibilityOf(myDriver.findElement(By.xpath(myPath))));
+    }
+
+
+
+    //TODO add try
     private static List<WebElement> getAucs(WebDriver myDriver, String url, String myPathToPlus, String myPathToAucs){
         myDriver.get(url);
         WebElement plus = myDriver.findElement(By.xpath(myPathToPlus));
         //click on +
         plus.click();
-        WebDriverWait wait = new WebDriverWait(myDriver, 5);
-        wait.until(ExpectedConditions.visibilityOf(myDriver.findElement(By.xpath(myPathToAucs))));
+        waitUntilLoad(myDriver, myPathToAucs);
         List<WebElement> aucs =  myDriver.findElements(By.xpath(myPathToAucs));
         return aucs;
 
 
-        //TODO  check for visibility
-
     }
 
+    private static List<WebElement> getLots(WebDriver myDriver, WebElement auction, String myPathToLots){
+        List<WebElement> lots = auction.findElements(By.xpath(myPathToLots));
+        //TODO check wait. Or replace it
+      //  WebDriverWait wait = new WebDriverWait(myDriver, sTimeout);
+       // wait.until(ExpectedConditions.visibilityOf(auction.findElement(By.xpath( myPathToLots))));
+        ////*[@id="folderListView"]/div[1]/label  //*[@id="folderListView"]/div[1]/label
+        ////*[@id="auctionGrid-2872"]/table/tbody/tr[1]
+        //
+        //#auctionGrid-2872 > table > tbody > tr:nth-child(1)
+        return lots;
+    }
 }
