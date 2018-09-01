@@ -26,6 +26,7 @@ public class Main {
         String pathToPlus = "/html/body/div[1]/div[1]/div[1]/div[2]/div[5]/div[1]/h4/a";
         String pathToAucs = "//*[@id=\"folderListView\"]/div";
         String pathToLots = "//*/table/tbody/tr";
+        String pathToLot = "//*/td[3]/a";
        // FirefoxProfile firefoxProfile = new FirefoxProfile();
        // firefoxProfile.setPreference("browser.private.browsing.autostart",true);
        // FirefoxOptions opt = new FirefoxOptions();
@@ -39,8 +40,9 @@ public class Main {
         plus.click();
         List<WebElement>  auctions= getAucs(driver, mainUrl, pathToPlus, pathToAucs);
         WebElement auction = auctions.get(0);
-       //TODO add wait?
+       //TODO add wait in get lots!?
         auction.click();
+
         List<WebElement> lots = getLots(driver, auction, pathToLots);
 
       //  aucs.get(0).findElement(By.xpath());
@@ -48,7 +50,7 @@ public class Main {
       //  wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(".//*[@onclick=\"loadAuctionsForCollection(2881,10)\"]"))));
       //  WebElement auc = driver.findElement(By.xpath(".//*[@onclick=\"loadAuctionsForCollection(2881,10)\"]"));
       //  auc.click();
-
+        clickLot(driver, lots.get(0), pathToLot); //works only in debug
         List els =  driver.findElements(By.xpath(".//*[@id=\"collapseFive\"]/div/div/div"));
         List els2 =  driver.findElements(By.xpath(".//*[@id=\"auctionGrid-2881\"]/table/tbody/tr[2]/td[3]/a"));
         List<WebElement> rows =  driver.findElements(By.xpath(".//*[@id=\"auctionGrid-2881\"]/table/tbody/tr"));
@@ -58,6 +60,7 @@ public class Main {
         someAuc.click();
 
         int debug = 0;
+        //TODO forget about wait -- > create lot click
       //IT WORKS!
        // wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(".//*[@id=\"auctionGrid-2881\"]"))));
        // WebElement table =  driver.findElement(By.xpath(".//*[@id=\"auctionGrid-2881\"]"));
@@ -88,14 +91,27 @@ public class Main {
     }
 
     private static List<WebElement> getLots(WebDriver myDriver, WebElement auction, String myPathToLots){
-        List<WebElement> lots = auction.findElements(By.xpath(myPathToLots));
-        //TODO check wait. Or replace it
+       // List<WebElement> lots = auction.findElements(By.xpath(myPathToLots));
+
+    //    String path = myPathToLots + "[1]";
+     //   WebElement debug = auction.findElement(By.xpath(path));
+        ////*[@id="auctionGrid-2873"]/table/tbody/tr[1]
       //  WebDriverWait wait = new WebDriverWait(myDriver, sTimeout);
-       // wait.until(ExpectedConditions.visibilityOf(auction.findElement(By.xpath( myPathToLots))));
+      //  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(path)));
+        List<WebElement> lots = auction.findElements(By.xpath(myPathToLots));
+      //  wait.until(ExpectedConditions.visibilityOf(auction.findElement(By.xpath( myPathToLots))));
         ////*[@id="folderListView"]/div[1]/label  //*[@id="folderListView"]/div[1]/label
         ////*[@id="auctionGrid-2872"]/table/tbody/tr[1]
         //
         //#auctionGrid-2872 > table > tbody > tr:nth-child(1)
         return lots;
+    }
+    private static void clickLot(WebDriver myDriver, WebElement row, String myPathToLot){
+
+        WebElement lot = row.findElement(By.xpath(myPathToLot));
+        lot.click();
+        ////*[@id="auctionGrid-2872"]/table/tbody/tr[3]/td[3]/a
+
+
     }
 }
