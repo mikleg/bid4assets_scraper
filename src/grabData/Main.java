@@ -40,7 +40,7 @@ public class Main {
         plus.click();
         List<WebElement>  auctions= getAucs(driver, mainUrl, pathToPlus, pathToAucs);
         WebElement auction = auctions.get(0);
-       //TODO add wait in get lots!?
+       //TO DO add wait in get lots /OK
         auction.click();
 
         List<WebElement> lots = getLots(driver, auction, pathToLots);
@@ -60,7 +60,7 @@ public class Main {
         someAuc.click();
 
         int debug = 0;
-        //TODO forget about wait -- > create lot click
+
       //IT WORKS!
        // wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(".//*[@id=\"auctionGrid-2881\"]"))));
        // WebElement table =  driver.findElement(By.xpath(".//*[@id=\"auctionGrid-2881\"]"));
@@ -96,8 +96,14 @@ public class Main {
     //    String path = myPathToLots + "[1]";
      //   WebElement debug = auction.findElement(By.xpath(path));
         ////*[@id="auctionGrid-2873"]/table/tbody/tr[1]
-      //  WebDriverWait wait = new WebDriverWait(myDriver, sTimeout);
+        WebDriverWait wait = new WebDriverWait(myDriver, sTimeout);
+
       //  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(path)));
+        String aucPath = getXpath(auction);
+        System.out.println(aucPath);
+        String newPath = aucPath + myPathToLots;
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(newPath)));
         List<WebElement> lots = auction.findElements(By.xpath(myPathToLots));
       //  wait.until(ExpectedConditions.visibilityOf(auction.findElement(By.xpath( myPathToLots))));
         ////*[@id="folderListView"]/div[1]/label  //*[@id="folderListView"]/div[1]/label
@@ -113,5 +119,20 @@ public class Main {
         ////*[@id="auctionGrid-2872"]/table/tbody/tr[3]/td[3]/a
 
 
+    }
+
+    private static String getXpath(WebElement ele) {
+        String str = ele.toString();
+        String[] listString;
+        String[] bug = new String[1];
+        bug[0] = "BUG";
+        if(str.contains("xpath"))
+            listString = str.split("xpath:");
+        else if(str.contains("id"))
+            listString = str.split("id:");
+        else listString = bug;
+
+        String last = listString[1].trim();
+        return last.substring(0, last.length() - 1);
     }
 }
