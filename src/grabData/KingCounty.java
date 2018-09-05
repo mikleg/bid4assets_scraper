@@ -29,6 +29,10 @@ public class KingCounty {
         }
         //--doneTODO Check length before click
         //TODO check all data fields
+        //TODO ADD gathering links
+        //TODO Add gathering docs
+        //TODO Add gathering screensoots
+        //TODO timestamps
         List<WebElement> aucs = base.getListByXpath(settings.getPathToAucs(), " get aucs");
         base.elementClick(aucs.get(3), "auc click:" );
         lots = base.getElements(aucs.get(3), settings.getPathToLots(), " get lots");
@@ -40,6 +44,11 @@ public class KingCounty {
 
             Map<String,String> permMap = settings.getPermanentMap();
             for (Map.Entry<String, String> entry : permMap.entrySet()) {
+                String data = base.getText(entry.getValue(),entry.getKey());
+                System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue() + " Data: " + data);
+            }
+            Map<String,String> varMap = settings.getVariableMap();
+            for (Map.Entry<String, String> entry : varMap.entrySet()) {
                 String data = base.getText(entry.getValue(),entry.getKey());
                 System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue() + " Data: " + data);
             }

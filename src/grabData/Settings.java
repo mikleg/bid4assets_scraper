@@ -19,21 +19,21 @@ public class Settings {
     public Map<String,String> getPermanentMap(){
         if(PermanentDataMap == null || PermanentDataMap.isEmpty()){
             PermanentDataMap = new HashMap<String, String>();
-            PermanentDataMap.put("b4aNumberPath", "//*[@id=\"auction-content\"]/h1");
-            PermanentDataMap.put("minimumBidPath", "//*[@id=\"auction-right-panel\"]/div[3]/table/tbody/tr[2]/td");
-            PermanentDataMap.put("auctionStartsPath", "//*[@id=\"auction-right-panel\"]/div[3]/table/tbody/tr[7]/td");
-            PermanentDataMap.put("auctionClosesPath", "//*[@id=\"actual-close-time-block\"]");
-            /*PermanentDataMap.put("DepositPath", "");
-            PermanentDataMap.put("urlPath", "");
-            PermanentDataMap.put("locationPath", "");
-            PermanentDataMap.put("aPNPath", "");
-            PermanentDataMap.put("legalDescriptionPath", "");
-            PermanentDataMap.put("gISPath", "");
-            PermanentDataMap.put("assessorInfoPath", "");
-            PermanentDataMap.put("titleReportPath", "");
-            PermanentDataMap.put("assessedValuesDatePath", "");
-            PermanentDataMap.put("improvementsValuePath", "");
-            PermanentDataMap.put("LandValuePath", "");*/
+            PermanentDataMap.put("b4aNumber", "//*[@id=\"auction-content\"]/h1");
+            PermanentDataMap.put("minimumBid", "//*[@id=\"auction-right-panel\"]/div[3]/table/tbody/tr[2]/td");
+            PermanentDataMap.put("auctionStarts", "//*[@id=\"auction-right-panel\"]/div[3]/table/tbody/tr[7]/td");
+            PermanentDataMap.put("auctionCloses", "//*[@id=\"actual-close-time-block\"]");
+            PermanentDataMap.put("Deposit", "//*[@id=\"auction-right-panel\"]/div[3]/table/tbody/tr[11]/td");
+           // PermanentDataMap.put("url", "");
+            PermanentDataMap.put("location", "//*[@id=\"auction-detail-left\"]/div[2]/table/tbody/tr[3]/td[2]");
+            PermanentDataMap.put("aPN", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[2]/td[2]");
+            PermanentDataMap.put("legalDescription", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[3]/td[2]");
+          //  PermanentDataMap.put("gIS", "");
+          //  PermanentDataMap.put("assessorInfo", "");
+          //  PermanentDataMap.put("titleReport", "");
+            PermanentDataMap.put("assessedValuesDate", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[2]/tbody/tr[2]/td[2]");
+            PermanentDataMap.put("improvementsValue", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[2]/tbody/tr[3]/td[2]");
+            PermanentDataMap.put("LandValue", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[2]/tbody/tr[5]/td[2]");
         }
         return  PermanentDataMap;
 
@@ -42,13 +42,13 @@ public class Settings {
     public Map<String,String> getVariableMap(){
         if(VariableDataMap == null || VariableDataMap.isEmpty()){
             VariableDataMap = new HashMap<String, String>();
-            VariableDataMap.put("b4aNumberPath", "");
-            VariableDataMap.put("currentBidPath", "");
-            VariableDataMap.put("statusPath", "");
-            VariableDataMap.put("numberOfBidsPath", "");
-            VariableDataMap.put("closesInPath", "");
-            VariableDataMap.put("pageViewsPath", "");
-            VariableDataMap.put("timestampPath", "");
+            VariableDataMap.put("b4aNumber", "//*[@id=\"auction-content\"]/h1");
+            VariableDataMap.put("currentBid", "//*[@id=\"current-bid-span\"]");
+            VariableDataMap.put("status", "//*[@id=\"auction-right-panel\"]/div[3]/table/tbody/tr[6]/td");
+            VariableDataMap.put("numberOfBids", "//*[@id=\"num-bids-block\"]");
+            VariableDataMap.put("closesIn", "//*[@id=\"time-remaining-block\"]");
+            VariableDataMap.put("pageViews", "//*[@id=\"auction-detail-page-views\"]");
+           // VariableDataMap.put("timestamp", "");
         }
         return  VariableDataMap;
 
