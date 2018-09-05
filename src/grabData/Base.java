@@ -171,10 +171,21 @@ public class Base {
     String getText(String xPath, String info){
         if (isElementOnPage(By.xpath(xPath))){
             WebElement el = driver.findElement(By.xpath(xPath));
-           return el.getText();
+            return el.getText();
         }
         else{
             System.out.println("an element with Xpath= " + xPath + " wasn't founded. getText = " + info);
+            return "None";
+        }
+    }
+
+    String getLink(String xPath, String info){
+        if (isElementOnPage(By.xpath(xPath))){
+            WebElement el = driver.findElement(By.xpath(xPath));
+            return el.getAttribute("href");
+        }
+        else{
+            System.out.println("an element with Xpath= " + xPath + " wasn't founded. getLink = " + info);
             return "None";
         }
     }
@@ -183,6 +194,16 @@ public class Base {
         Map<String, String> result = new HashMap<>();
         for (Map.Entry<String, String> entry : xpaths.entrySet()) {
             String data = getText(entry.getValue(),entry.getKey());
+            result.put(entry.getKey(), data);
+            System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue() + " Data: " + data);
+        }
+        return  result;
+    }
+
+    Map<String, String> getLinks(Map<String, String> xpaths){
+        Map<String, String> result = new HashMap<>();
+        for (Map.Entry<String, String> entry : xpaths.entrySet()) {
+            String data = getLink(entry.getValue(),entry.getKey());
             result.put(entry.getKey(), data);
             System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue() + " Data: " + data);
         }

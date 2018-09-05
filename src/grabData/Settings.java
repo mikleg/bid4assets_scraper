@@ -57,6 +57,7 @@ public class Settings {
 
     public Map<String,String> getLinksMap(){
         if(LinksDataMap == null || LinksDataMap.isEmpty()){
+              LinksDataMap = new HashMap<String, String>();
               LinksDataMap.put("gIS", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[5]/td[2]/a");
               LinksDataMap.put("assessorInfo", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[6]/td[2]/li[1]/a");
               LinksDataMap.put("titleReport", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[6]/td[2]/li[2]/a");
