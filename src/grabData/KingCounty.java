@@ -42,16 +42,9 @@ public class KingCounty {
             base.elementClick(lot, "click lot");
             base.sleep(500);
 
-            Map<String,String> permMap = settings.getPermanentMap();
-            for (Map.Entry<String, String> entry : permMap.entrySet()) {
-                String data = base.getText(entry.getValue(),entry.getKey());
-                System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue() + " Data: " + data);
-            }
-            Map<String,String> varMap = settings.getVariableMap();
-            for (Map.Entry<String, String> entry : varMap.entrySet()) {
-                String data = base.getText(entry.getValue(),entry.getKey());
-                System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue() + " Data: " + data);
-            }
+            base.getTexts(settings.getPermanentMap());
+            base.getTexts(settings.getVariableMap());
+
         //driver.navigate().back();
 
         }

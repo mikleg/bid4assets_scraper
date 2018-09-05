@@ -1,5 +1,7 @@
 package grabData;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -177,5 +179,14 @@ public class Base {
         }
     }
 
+    Map<String, String> getTexts(Map<String, String> xpaths){
+        Map<String, String> result = new HashMap<>();
+        for (Map.Entry<String, String> entry : xpaths.entrySet()) {
+            String data = getText(entry.getValue(),entry.getKey());
+            result.put(entry.getKey(), data);
+            System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue() + " Data: " + data);
+        }
+        return  result;
+    }
 
 }

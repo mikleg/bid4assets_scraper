@@ -16,6 +16,7 @@ public class Settings {
     //Path to data
     private Map<String,String> PermanentDataMap;
     private Map<String,String> VariableDataMap;
+    private Map<String,String> LinksDataMap;
     public Map<String,String> getPermanentMap(){
         if(PermanentDataMap == null || PermanentDataMap.isEmpty()){
             PermanentDataMap = new HashMap<String, String>();
@@ -54,36 +55,15 @@ public class Settings {
 
     }
 
-/*
+    public Map<String,String> getLinksMap(){
+        if(LinksDataMap == null || LinksDataMap.isEmpty()){
+              LinksDataMap.put("gIS", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[5]/td[2]/a");
+              LinksDataMap.put("assessorInfo", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[6]/td[2]/li[1]/a");
+              LinksDataMap.put("titleReport", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[6]/td[2]/li[2]/a");
+        }
+        return  LinksDataMap;
 
-    private String b4aNumberPath = "";
-    private String minimumBidPath = "";
-    private String auctionStartsPath = "";
-    private String auctionClosesPath = "";
-    private String DepositPath = "";
-    private String urlPath = "";
-    private String locationPath = "";
-    private String aPNPath = "";
-    private String legalDescriptionPath = "";
-    private String gISPath = "";
-    private String assessorInfoPath = "";
-    private String titleReportPath = "";
-    private String assessedValuesDatePath = "";
-    private String improvementsValuePath = "";
-    private String LandValuePath = "";
-    private String currentBidPath = "";
-    private String statusPath = "";
-    private String numberOfBidsPath = "";
-    private String closesInPath = "";
-    private String pageViewsPath = "";
-    private String timestampPath = "";
-*/
-
-
-
-
-
-
+    }
 
 
     public String getExePath() {
