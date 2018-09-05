@@ -43,8 +43,7 @@ public class KingCounty {
         if(base.isElementOnPage(lots.get(3))){
             lot = base.getElement(lots.get(3),settings.getPathToLot(), "get lot");
             base.elementClick(lot, "click lot");
-         //TODO replace on wait
-            base.sleep(500);
+
             gatherDataPage();
 
 
@@ -57,6 +56,12 @@ public class KingCounty {
     }
         //private getAucInfo()
     private void gatherDataPage(){
+        //TO DO replace on wait
+        base.sleep(500);
+        if(!base.isElementOnPage(By.xpath(settings.getPathToLastElement()))){
+            base.sleep(3500);
+           // base.isElementOnPage(By.xpath(settings.getPathToLastElement()));
+        }
         Map<String, String> permMap = base.getTexts(settings.getPermanentMap());
         Map<String, String> varMap = base.getTexts(settings.getVariableMap());
         String timeStamp = ZonedDateTime.now().format(DateTimeFormatter.RFC_1123_DATE_TIME);

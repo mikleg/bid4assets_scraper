@@ -12,6 +12,7 @@ public class Settings {
     private String pathToAucs = "//*[@id=\"folderListView\"]/div";
     private String pathToLots = "//*/table/tbody/tr";
     private String pathToLot = "//*/td[3]/a";
+    private String pathToLastElement = "//*[@id=\"additional-info-footer\"]/div[4]/ul/li[4]/a"; //for checking that page is loaded
 
     //Path to data
     private Map<String,String> PermanentDataMap;
@@ -97,5 +98,9 @@ public class Settings {
 
     public String getCrashMessage() {
         return crashMessage;
+    }
+
+    public String getPathToLastElement() {
+        return pathToLastElement;
     }
 }
