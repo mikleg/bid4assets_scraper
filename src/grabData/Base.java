@@ -143,11 +143,22 @@ public class Base {
         }
 
     }
-    private void sleep(int time){
+    protected void sleep(int time){
         try{
             Thread.sleep(time);
         }
         catch(InterruptedException ie){
+        }
+    }
+
+    public String getText(String xPath, String info){
+        if (isElementOnPage(By.xpath(xPath))){
+            WebElement el = driver.findElement(By.xpath(xPath));
+           return el.getText();
+        }
+        else{
+            System.out.println("an element with Xpath= " + xPath + " wasn't founded. getText = " + info);
+            return "None";
         }
     }
 }

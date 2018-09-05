@@ -1,9 +1,7 @@
 package grabData;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-
-import java.security.PrivateKey;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Settings {
     private String crashMessage = "Crash in:";
@@ -14,6 +12,79 @@ public class Settings {
     private String pathToAucs = "//*[@id=\"folderListView\"]/div";
     private String pathToLots = "//*/table/tbody/tr";
     private String pathToLot = "//*/td[3]/a";
+
+    //Path to data
+    private Map<String,String> PermanentDataMap;
+    private Map<String,String> VariableDataMap;
+    public Map<String,String> getPermanentMap(){
+        if(PermanentDataMap == null || PermanentDataMap.isEmpty()){
+            PermanentDataMap = new HashMap<String, String>();
+            PermanentDataMap.put("b4aNumberPath", "//*[@id=\"auction-content\"]/h1");
+            PermanentDataMap.put("minimumBidPath", "//*[@id=\"auction-right-panel\"]/div[3]/table/tbody/tr[2]/td");
+            PermanentDataMap.put("auctionStartsPath", "//*[@id=\"auction-right-panel\"]/div[3]/table/tbody/tr[7]/td");
+            PermanentDataMap.put("auctionClosesPath", "//*[@id=\"actual-close-time-block\"]");
+            /*PermanentDataMap.put("DepositPath", "");
+            PermanentDataMap.put("urlPath", "");
+            PermanentDataMap.put("locationPath", "");
+            PermanentDataMap.put("aPNPath", "");
+            PermanentDataMap.put("legalDescriptionPath", "");
+            PermanentDataMap.put("gISPath", "");
+            PermanentDataMap.put("assessorInfoPath", "");
+            PermanentDataMap.put("titleReportPath", "");
+            PermanentDataMap.put("assessedValuesDatePath", "");
+            PermanentDataMap.put("improvementsValuePath", "");
+            PermanentDataMap.put("LandValuePath", "");*/
+        }
+        return  PermanentDataMap;
+
+    }
+
+    public Map<String,String> getVariableMap(){
+        if(VariableDataMap == null || VariableDataMap.isEmpty()){
+            VariableDataMap = new HashMap<String, String>();
+            VariableDataMap.put("b4aNumberPath", "");
+            VariableDataMap.put("currentBidPath", "");
+            VariableDataMap.put("statusPath", "");
+            VariableDataMap.put("numberOfBidsPath", "");
+            VariableDataMap.put("closesInPath", "");
+            VariableDataMap.put("pageViewsPath", "");
+            VariableDataMap.put("timestampPath", "");
+        }
+        return  VariableDataMap;
+
+    }
+
+/*
+
+    private String b4aNumberPath = "";
+    private String minimumBidPath = "";
+    private String auctionStartsPath = "";
+    private String auctionClosesPath = "";
+    private String DepositPath = "";
+    private String urlPath = "";
+    private String locationPath = "";
+    private String aPNPath = "";
+    private String legalDescriptionPath = "";
+    private String gISPath = "";
+    private String assessorInfoPath = "";
+    private String titleReportPath = "";
+    private String assessedValuesDatePath = "";
+    private String improvementsValuePath = "";
+    private String LandValuePath = "";
+    private String currentBidPath = "";
+    private String statusPath = "";
+    private String numberOfBidsPath = "";
+    private String closesInPath = "";
+    private String pageViewsPath = "";
+    private String timestampPath = "";
+*/
+
+
+
+
+
+
+
 
     public String getExePath() {
         return exePath;

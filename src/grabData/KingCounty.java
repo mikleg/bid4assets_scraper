@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
+import java.util.Map;
 
 public class KingCounty {
     Base base;
@@ -26,6 +27,7 @@ public class KingCounty {
             plus = driver.findElement(By.xpath(settings.getPathToPlus()));
             base.elementClick(plus, "plus");
         }
+        //TODO Check length before click
         List<WebElement> aucs = base.getListByXpath(settings.getPathToAucs(), " get aucs");
         base.elementClick(aucs.get(3), "auc click:" );
         lots = base.getElements(aucs.get(3), settings.getPathToLots(), " get lots");
@@ -33,11 +35,20 @@ public class KingCounty {
         if(base.isElementOnPage(lots.get(3))){
             lot = base.getElement(lots.get(3),settings.getPathToLot(), "get lot");
             base.elementClick(lot, "click lot");
+            base.sleep(500);
+
+            Map<String,String> permMap = settings.getPermanentMap();
+            for (Map.Entry<String, String> entry : permMap.entrySet()) {
+                String data = base.getText(entry.getValue(),entry.getKey());
+                System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue() + " Data: " + data);
+            }
+        //driver.navigate().back();
 
         }
 
 
     }
+        //private getAucInfo()
 
 
 }
