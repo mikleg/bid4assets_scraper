@@ -27,7 +27,8 @@ public class KingCounty {
             plus = driver.findElement(By.xpath(settings.getPathToPlus()));
             base.elementClick(plus, "plus");
         }
-        //TODO Check length before click
+        //--doneTODO Check length before click
+        //TODO check all data fields
         List<WebElement> aucs = base.getListByXpath(settings.getPathToAucs(), " get aucs");
         base.elementClick(aucs.get(3), "auc click:" );
         lots = base.getElements(aucs.get(3), settings.getPathToLots(), " get lots");

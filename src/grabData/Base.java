@@ -87,6 +87,21 @@ public class Base {
     public List<WebElement> getListByXpath(String path, String addnlInf) {
         List<WebElement> aucs;
         if (isElementOnPage(By.xpath(path))){
+            int size;
+            int initialSize = driver.findElements(By.xpath(path)).size();
+            // System.out.println("debug sz =" + size);
+            do {
+                size = driver.findElements(By.xpath(path)).size();
+                sleep(minSleepTime);
+                if (size == driver.findElements(By.xpath(path)).size())
+                {sleep(minSleepTime*10); System.out.println("debug sz10 =" + size);}
+                if (size == driver.findElements(By.xpath(path)).size())
+                {sleep(minSleepTime*100); System.out.println("debug sz100 =" + size);}
+                if (size == driver.findElements(By.xpath(path)).size() && size == initialSize && initialSize < 2)
+                {sleep(minSleepTime*1000); System.out.println("debug sz1000 =" + size);}
+            } while(driver.findElements(By.xpath(path)).size() > size);
+
+
             aucs = driver.findElements(By.xpath(path));
         }
         else {
@@ -143,7 +158,7 @@ public class Base {
         }
 
     }
-    protected void sleep(int time){
+     void sleep(int time){
         try{
             Thread.sleep(time);
         }
@@ -151,7 +166,7 @@ public class Base {
         }
     }
 
-    public String getText(String xPath, String info){
+    String getText(String xPath, String info){
         if (isElementOnPage(By.xpath(xPath))){
             WebElement el = driver.findElement(By.xpath(xPath));
            return el.getText();
@@ -161,4 +176,6 @@ public class Base {
             return "None";
         }
     }
+
+
 }
