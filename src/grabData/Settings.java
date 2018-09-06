@@ -10,8 +10,8 @@ public class Settings {
     private String mainUrl = "https://secure.bid4assets.com/mvc/storefront/KingWASept18";
     private String pathToPlus = "/html/body/div[1]/div[1]/div[1]/div[2]/div[5]/div[1]/h4/a";
     private String pathToAucs = "//*[@id=\"folderListView\"]/div";
-    private String pathToLots = "//*/table/tbody/tr";
-    private String pathToLot = "//*/td[3]/a";
+    private String pathToLots = "//*/table/tbody/tr[*]";
+    private String pathToLot = "/td[3]/a";
     private String pathToLastElement = "//*[@id=\"additional-info-footer\"]/div[4]/ul/li[4]/a"; //for checking that page is loaded
 
     //Path to data
