@@ -13,12 +13,14 @@ public class Settings {
     private String pathToLots = "//*/table/tbody/tr[*]";
     private String pathToLot = "/td[3]/a";
     private String pathToLastElement = "//*[@id=\"additional-info-footer\"]/div[4]/ul/li[4]/a"; //for checking that page is loaded
+    private String pathToAddnlData2 = "//*[@id=\"kingcounty_gov_cphContent_LinkButtonDetail\"]";
 
     //Path to data
     private Map<String,String> PermanentDataMap;
     private Map<String,String> VariableDataMap;
     private Map<String,String> LinksDataMap;
     private Map<String,String> AdditionalDataMap;
+    private Map<String,String> AdditionalDataMap2;
     public Map<String,String> getPermanentMap(){
         if(PermanentDataMap == null || PermanentDataMap.isEmpty()){
             PermanentDataMap = new HashMap<String, String>();
@@ -89,6 +91,28 @@ public class Settings {
 
     }
 
+    public Map<String,String> getAdditionalDataMap2(){
+        if(AdditionalDataMap2 == null || AdditionalDataMap2.isEmpty()){
+            AdditionalDataMap2 = new HashMap<String, String>();
+            AdditionalDataMap2.put("Jurisdiction", "Jurisdiction");
+            AdditionalDataMap2.put("SiteAddress", "Site Address");
+            AdditionalDataMap2.put("Percentage Unusable", "Percentage Unusable");
+            AdditionalDataMap2.put("RestrictiveSizeShape", "Restrictive Size Shape");
+            AdditionalDataMap2.put("Zoning", "Zoning");
+            AdditionalDataMap2.put("Water", "Water");
+            AdditionalDataMap2.put("SewerSeptic", "Sewer/Septic");
+            AdditionalDataMap2.put("Road Access", "Road Access");
+            AdditionalDataMap2.put("Parking", "Parking");
+            AdditionalDataMap2.put("StreetSurface", "Street Surface");
+
+
+
+
+        }
+        return  AdditionalDataMap2;
+
+    }
+
 
     public String getExePath() {
         return exePath;
@@ -124,5 +148,9 @@ public class Settings {
 
     public String getPathToLastElement() {
         return pathToLastElement;
+    }
+
+    public String getPathToAddnlData2() {
+        return pathToAddnlData2;
     }
 }

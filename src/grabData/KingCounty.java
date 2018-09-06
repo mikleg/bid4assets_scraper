@@ -46,10 +46,10 @@ public class KingCounty {
         base.elementClick(aucs.get(3), "auc click:" );
         lots = base.getElements(aucs.get(3), settings.getPathToLots(), " get lots");
         System.out.println("debug:" + lots.size());
-        if(base.isElementOnPage(lots.get(3))){
+        if(base.isElementOnPage(lots.get(1))){
             ////*[@id="auctionGrid-2875"]/table/tbody/tr[1]/td[3]
             //*[@id="auctionGrid-2875"]/table/tbody/tr[1]/td[3]
-          lot = base.getElement(lots.get(3),"//*[" + 3 + "]" + settings.getPathToLot(), "get lot");
+          lot = base.getElement(lots.get(1),"//*[" + 1 + "]" + settings.getPathToLot(), "get lot");
             base.elementClick(lot, "click lot");
             gatherDataPage();
 
@@ -77,8 +77,13 @@ public class KingCounty {
         System.out.println(timeStamp);
         System.out.println(url);
         driver.navigate().to(linksMap.get("assessorInfo"));
-        base.sleep(1500);
-        Map<String, String> addlDataMap = base.getTextsBySiblingsText(settings.getAdditionalDataMap(), ".//td[2]");
+        base.sleep(2500);
+       // Map<String, String> addlDataMap = base.getTextsBySiblingsText(settings.getAdditionalDataMap(), ".//td[2]");
+        if(base.isElementOnPage(By.xpath(settings.getPathToAddnlData2()))){
+            WebElement elt = driver.findElement(By.xpath(settings.getPathToAddnlData2()));
+            elt.click();
+        }
+        Map<String, String> addlDataMap2 = base.getTextsBySiblingsText(settings.getAdditionalDataMap2(), ".//td[2]");
         //TODO replace sleep
 
 
