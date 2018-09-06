@@ -1,10 +1,12 @@
 package grabData;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
@@ -20,14 +22,59 @@ public class Base {
         settings = new Settings();
         if (browswerName == "ff") {
             System.setProperty("webdriver.gecko.driver", settings.getFfDriverPath());
-            FirefoxProfile firefoxProfile = new FirefoxProfile();
-            firefoxProfile.setPreference("browser.private.browsing.autostart",true);
-            FirefoxOptions opt = new FirefoxOptions();
-            driver = new FirefoxDriver(opt);
+           // FirefoxProfile profile = new FirefoxProfile();
+            FirefoxOptions firefoxOptions = new FirefoxOptions();
+            firefoxOptions.setCapability("marionette", true);
+            //webdriver = new FirefoxDriver(firefoxOptions);
+
+          //  FirefoxProfile profile = new FirefoxProfile();
+            firefoxOptions.setCapability("browser.download.dir", "C:\\Utility\\Downloads");
+            firefoxOptions.setCapability("browser.download.folderList",2);
+            firefoxOptions.setCapability("browser.helperApps.neverAsk.saveToDisk", "text/plain,application/octet-stream,application/pdf,application/x-pdf,application/vnd.pdf");
+            firefoxOptions.setCapability("browser.download.manager.showWhenStarting", false);
+            firefoxOptions.setCapability("browser.helperApps.neverAsk.openFile","text/plain,application/octet-stream,application/pdf,application/x-pdf,application/vnd.pdf");
+            firefoxOptions.setCapability("browser.helperApps.alwaysAsk.force", false);
+            firefoxOptions.setCapability("browser.download.manager.useWindow", false);
+            firefoxOptions.setCapability("browser.download.manager.focusWhenStarting", false);
+            firefoxOptions.setCapability("browser.helperApps.neverAsk.openFile", "");
+            firefoxOptions.setCapability("browser.download.manager.alertOnEXEOpen", false);
+            firefoxOptions.setCapability("browser.download.manager.showAlertOnComplete", false);
+            firefoxOptions.setCapability("browser.download.manager.closeWhenDone", true);
+            firefoxOptions.setCapability("pdfjs.disabled", true);
+           // System.setProperty("webdriver.firefox.bin", settings.getFfDriverPath());
+            //WebDriver ddriver = new FirefoxDriver(profile);
+            driver = new FirefoxDriver(firefoxOptions);
+            
+
+
+
+            //firefoxProfile.setPreference("browser.private.browsing.autostart",true);
+           // FirefoxOptions opt = new FirefoxOptions();
+           // driver = new FirefoxDriver(opt);
         }
         else {
             System.setProperty("webdriver.chrome.driver", settings.getExePath());
+
+            //
+           /* ChromeOptions options = new ChromeOptions();
+            Map<String, Object> preferences = new Hashtable<String, Object>();
+            options.setExperimentalOption("prefs", preferences);
+
+// disable flash and the PDF viewer
+            preferences.put("plugins.plugins_disabled", new String[] {
+                    "Chrome PDF Viewer"
+            });*/
+
+
+           // driver = new ChromeDriver(options);
             driver = new ChromeDriver();
+
+
+
+
+
+            //
+
         }
         return driver;
     }
@@ -179,6 +226,34 @@ public class Base {
         }
     }
 
+    String getTextOfSibling(String xPath, String pathToSibling, String info){
+        if (isElementOnPage(By.xpath(xPath))){
+            WebElement el = driver.findElement(By.xpath(xPath));
+            WebElement parent = el.findElement(By.xpath(".."));
+            //divA.findElement(By.xpath(".//input"));
+            if (isElementOnPage(parent.findElement(By.xpath(pathToSibling)))){
+                WebElement child =  parent.findElement(By.xpath(pathToSibling));
+                return child.getText();
+            }
+            else
+            {System.out.println("an child element with Xpath= " + xPath + pathToSibling + " wasn't founded. getTextOfSibling = " + info);}
+
+        }
+        else{
+            System.out.println("an element with Xpath= " + xPath + " wasn't founded. getTextOfSibling = " + info);
+        }
+        return "None";
+    }
+
+    String getTextOfSiblingsText(String text, String pathToSibling, String info){
+        String xPath = "//*[contains(text(),'" + text + "')]";
+        return getTextOfSibling(xPath, pathToSibling, info);
+    }
+
+
+
+
+
     String getLink(String xPath, String info){
         if (isElementOnPage(By.xpath(xPath))){
             WebElement el = driver.findElement(By.xpath(xPath));
@@ -194,6 +269,17 @@ public class Base {
         Map<String, String> result = new HashMap<>();
         for (Map.Entry<String, String> entry : xpaths.entrySet()) {
             String data = getText(entry.getValue(),entry.getKey());
+            result.put(entry.getKey(), data);
+            System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue() + " Data: " + data);
+        }
+        return  result;
+    }
+
+    Map<String, String> getTextsBySiblingsText(Map<String, String> xpaths, String sibling){
+        Map<String, String> result = new HashMap<>();
+        for (Map.Entry<String, String> entry : xpaths.entrySet()) {
+
+            String data = getTextOfSiblingsText(entry.getValue(), sibling, entry.getKey());
             result.put(entry.getKey(), data);
             System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue() + " Data: " + data);
         }
