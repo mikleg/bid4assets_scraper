@@ -46,10 +46,10 @@ public class KingCounty {
         base.elementClick(aucs.get(3), "auc click:" );
         lots = base.getElements(aucs.get(3), settings.getPathToLots(), " get lots");
         System.out.println("debug:" + lots.size());
-        if(base.isElementOnPage(lots.get(1))){
+        if(base.isElementOnPage(lots.get(3))){
             ////*[@id="auctionGrid-2875"]/table/tbody/tr[1]/td[3]
             //*[@id="auctionGrid-2875"]/table/tbody/tr[1]/td[3]
-          lot = base.getElement(lots.get(1),"//*[" + 1 + "]" + settings.getPathToLot(), "get lot");
+          lot = base.getElement(lots.get(3),"//*[" + 3 + "]" + settings.getPathToLot(), "get lot");
             base.elementClick(lot, "click lot");
             gatherDataPage();
 
@@ -69,8 +69,8 @@ public class KingCounty {
             base.sleep(3500);
            // base.isElementOnPage(By.xpath(settings.getPathToLastElement()));
         }
-        Map<String, String> permMap = base.getTexts(settings.getPermanentMap());
-        Map<String, String> varMap = base.getTexts(settings.getVariableMap());
+       // Map<String, String> permMap = base.getTexts(settings.getPermanentMap());
+       // Map<String, String> varMap = base.getTexts(settings.getVariableMap());
         Map<String, String> linksMap = base.getLinks(settings.getLinksMap());
         String timeStamp = ZonedDateTime.now().format(DateTimeFormatter.RFC_1123_DATE_TIME);
         String url = driver.getCurrentUrl();

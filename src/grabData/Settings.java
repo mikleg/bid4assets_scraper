@@ -68,55 +68,21 @@ public class Settings {
 
     }
 
-/*    <table class="GridViewStyle" cellspacing="1" cellpadding="3" rules="all" border="1" id="kingcounty_gov_cphContent_DetailsViewPropTypeC" style="font-size:Small;height:50px;width:300px;">
-		<tbody><tr class="GridViewAlternatingRowStyle">
-			<td style="font-weight:bold;">Year Built</td><td>&nbsp;</td>
-		</tr><tr class="GridViewRowStyle">
-			<td style="font-weight:bold;">Building Net Square Footage</td><td>&nbsp;</td>
-		</tr><tr class="GridViewAlternatingRowStyle">
-			<td style="font-weight:bold;">Construction Class</td><td>&nbsp;</td>
-		</tr><tr class="GridViewRowStyle">
-			<td style="font-weight:bold;">Building Quality</td><td>&nbsp;</td>
-		</tr><tr class="GridViewAlternatingRowStyle">
-			<td style="font-weight:bold;">Lot Size</td><td>90</td>
-		</tr><tr class="GridViewRowStyle">
-			<td style="font-weight:bold;">Present Use</td><td>Vacant(Multi-family)</td>
-		</tr><tr class="GridViewAlternatingRowStyle">
-			<td style="font-weight:bold;">Views</td><td>No</td>
-		</tr><tr class="GridViewRowStyle">
-			<td style="font-weight:bold;">Waterfront</td><td> </td>
-		</tr>
-	</tbody></table>*/
-
-
-
 
     public Map<String,String> getAdditionalDataMap(){
         if(AdditionalDataMap == null || AdditionalDataMap.isEmpty()){
             AdditionalDataMap = new HashMap<String, String>();
-            //AdditionalDataMap.put("lotSize", "//*[contains(@id,'Content_DetailsViewPropType')]/tbody/tr[5]/td[2]");
             AdditionalDataMap.put("lotSize", "Lot Size");
-           // AdditionalDataMap.put("lotSize", "//*[contains(text(),'Lot Size')]");
-
-            //*[@id="kingcounty_gov_cphContent_DetailsViewPropTypeR"]/tbody/tr[7]/td[2]
-
-          //  AdditionalDataMap.put("views", "//*[@class='GridViewStyle']/tbody/tr[8]/td[2]");
-          //  AdditionalDataMap.put("yearBuilt", "//*[@class='GridViewStyle'][@style='font-size:Small;height:50px;width:300px;']/tbody/tr[1]/td[2]");
-            ////*[@id="kingcounty_gov_cphContent_DetailsViewPropTypeC"]/tbody/tr[1]/td[2]
-            ////*[contains(@id,'_default-create-firstname')]
-//            AdditionalDataMap.put("numberOfBedrooms", "//*[@class='GridViewStyle']/tbody/tr[3]/td[2]");
-          //  AdditionalDataMap.put("numberOfBaths", "//*[@class='GridViewStyle']/tbody/tr[4]/td[2]");
-         //   AdditionalDataMap.put("grade", "//*[@class='GridViewStyle']/tbody/tr[5]/td[2]");
-          //  AdditionalDataMap.put("condition", "//*[@class='GridViewStyle']/tbody/tr[6]/td[2]");
-           // AdditionalDataMap.put("lotSize", "//*tr[@class='GridViewStyle'][]/tbody/tr[7]/td[2]");
-
-            ////*[@id="kingcounty_gov_cphContent_DetailsViewPropTypeC"]/tbody/tr[5]/td[2]
-            ////*[@id="kingcounty_gov_cphContent_DetailsViewPropTypeC"]/tbody/tr[5]/td[2]
-            ////*[@id="kingcounty_gov_cphContent_DetailsViewPropTypeC"]/tbody/tr[7]/td[2]
-            ////*[@id="kingcounty_gov_cphContent_DetailsViewPropTypeC"]/tbody/tr[5]
-
-         //   AdditionalDataMap.put("waterfront", "//*[@class='GridViewStyle']/tbody/tr[8]/td[2]");
-          //  AdditionalDataMap.put("parcelNumber", "//*[@id=\"kingcounty_gov_cphContent_DetailsViewDashboardHeader\"]/tbody/tr[1]/td[2]");
+            AdditionalDataMap.put("views", "Views");
+            AdditionalDataMap.put("yearBuilt", "Year Built");
+            AdditionalDataMap.put("numberOfBedrooms", "Number Of Bedrooms");
+            AdditionalDataMap.put("numberOfBaths", "Number Of Baths");
+            AdditionalDataMap.put("grade", "Grade");
+            AdditionalDataMap.put("condition", "Condition");
+            AdditionalDataMap.put("waterfront", "Waterfront");
+            AdditionalDataMap.put("parcelNumber", "Parcel Number");
+            AdditionalDataMap.put("constructionClass", "Construction Class");
+            AdditionalDataMap.put("presentUse", "Present Use");
 
         }
         return  AdditionalDataMap;
