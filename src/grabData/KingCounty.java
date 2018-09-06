@@ -3,11 +3,6 @@ package grabData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -83,24 +78,12 @@ public class KingCounty {
             WebElement elt = driver.findElement(By.xpath(settings.getPathToAddnlData2()));
             elt.click();
         }
-        Map<String, String> addlDataMap2 = base.getTextsBySiblingsText(settings.getAdditionalDataMap2(), ".//td[2]");
+       // Map<String, String> addlDataMap2 = base.getTextsBySiblingsText(settings.getAdditionalDataMap2(), ".//td[2]");
+        Db.createNewDatabase("test.db");
         //TODO replace sleep
+        //http://www.sqlitetutorial.net/sqlite-java/
 
 
-        //driver.navigate().to(linksMap.get("titleReport"));
-        //base.sleep(1500);
-
-/*        try {
-            testChromeDownloadPopup();
-        }
-        catch(InterruptedException ie){
-        }*/
-
-        /*if(base.isElementOnPage(By.xpath("*[@id=\"download\"]"))){
-            driver.findElement(By.xpath("*[@id=\"download\"]")).;
-        }*/
-        ////*[@id="icon"]
-        // //*[@id="download"]
 
     }
 
