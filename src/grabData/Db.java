@@ -38,8 +38,11 @@ public class Db implements DbInterface {
         }
 
         String sql = "CREATE TABLE IF NOT EXISTS " +  name + " (\n"
-                + fields
+                 + "	id integer PRIMARY KEY,\n"
+                + fields.substring(0, fields.length()-2)
+                //+ "	id integer PRIMARY KEY,\n"
               + ");";
+
         System.out.println("sql_debug=" + sql);
         try (Connection conn = DriverManager.getConnection(url);
              Statement stmt = conn.createStatement()) {

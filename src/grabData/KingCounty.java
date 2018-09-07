@@ -78,11 +78,13 @@ public class KingCounty {
             WebElement elt = driver.findElement(By.xpath(settings.getPathToAddnlData2()));
             elt.click();
         }
+        driver.close();
         //Map<String, String> addlDataMap2 = base.getTextsBySiblingsText(settings.getAdditionalDataMap2(), ".//td[2]");
 
         Db mydb = new Db();
         mydb.createNewDatabase("test.db");
         mydb.createNewTable("permData", addlDataMap);
+
         //TODO replace sleep
         //http://www.sqlitetutorial.net/sqlite-java/
 
