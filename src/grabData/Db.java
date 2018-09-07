@@ -95,7 +95,6 @@ public class Db implements DbInterface {
     private String getValues(Map<String, String> map){
         String fields ="";
         for (Map.Entry<String, String> entry : map.entrySet()) {
-            //TODO doesen't work
             if (entry.getValue().length()>0)
            // {fields = fields + " " + "'"+entry.getValue().replaceAll("\\s","")+"'" + ",\n";}
             {fields = fields + " " + "'"+entry.getValue()+"'" + ",\n";}
