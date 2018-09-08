@@ -26,6 +26,9 @@ public class Db implements DbInterface {
         return false;
     }
     public boolean isPermanentDataExist(Map<String, String> map){
+
+
+
         return false;
     }
     public  void createNewTable(String name, Map<String, String> map) {
@@ -37,38 +40,24 @@ public class Db implements DbInterface {
             fields = fields + " " + entry.getKey() + " text,\n";
         }*/
 
-        String sql = "CREATE TABLE IF NOT EXISTS " +  name + " (\n"
-                 + "	id integer PRIMARY KEY,\n"
-              //  + fields.substring(0, fields.length()-2)
+        String sql = "CREATE TABLE IF NOT EXISTS " + name + " (\n"
+                + "	id integer PRIMARY KEY,\n"
+                //  + fields.substring(0, fields.length()-2)
                 + getFieldsText(map)
                 //+ "	id integer PRIMARY KEY,\n"
-              + ");";
-
-        System.out.println("sql_debug=" + sql);
-        try (Connection conn = DriverManager.getConnection(url);
-             Statement stmt = conn.createStatement()) {
-            // create a new table
-            stmt.execute(sql);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+                + ");";
+        runSql(sql);
     }
-    public void addPermanentData(Map<String, String> map){
+    public void addData(String tableName, Map<String, String> map){
         //String aucnumb = map.get("b4aNumber");
         //String sql = "SELECT COUNT b4aNumber FROM permanentData WHERE b4aNumber =" + aucnumb + " ;";
 
-        String sql = "INSERT INTO permanentData (\n"
+        String sql = "INSERT INTO " + tableName + " (\n"
                 + getFields(map) +")"
                 + " VALUES\n" +
                 " (\n" +
                 getValues(map) +");";
-        System.out.println("sql_debug=" + sql);
-        try (Connection conn = DriverManager.getConnection(url);
-             Statement stmt = conn.createStatement()) {
-            stmt.execute(sql);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+        runSql(sql);
     }
     public void changeVariableData(Map<String, String> map){
 
@@ -103,6 +92,18 @@ public class Db implements DbInterface {
             }
         }
         return fields.substring(0, fields.length()-2);
+    }
+
+    private boolean runSql(String sql){
+        System.out.println("sql_debug=" + sql);
+        try (Connection conn = DriverManager.getConnection(url);
+             Statement stmt = conn.createStatement()) {
+            stmt.execute(sql);
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 
 

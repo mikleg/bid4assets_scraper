@@ -84,7 +84,7 @@ public class KingCounty {
         Db mydb = new Db();
         mydb.createNewDatabase("test.db");
         mydb.createNewTable("permanentData", addlDataMap);
-        mydb.addPermanentData(addlDataMap);
+        mydb.addData("permanentData", addlDataMap);
 
         //TODO replace sleep
         //http://www.sqlitetutorial.net/sqlite-java/
