@@ -26,8 +26,10 @@ public class Db implements DbInterface {
         return false;
     }
     public boolean isPermanentDataExist(Map<String, String> map){
-
-
+        //TODO replace parcelNumber
+        String aucnumb = map.get("parcelNumber");
+        String sql = "SELECT COUNT(*) FROM permanentData WHERE parcelNumber ='" + aucnumb + "' ;";
+        System.out.println(getQueryResultToStings(sql));
 
         return false;
     }
@@ -86,7 +88,10 @@ public class Db implements DbInterface {
         for (Map.Entry<String, String> entry : map.entrySet()) {
             if (entry.getValue().length()>0)
            // {fields = fields + " " + "'"+entry.getValue().replaceAll("\\s","")+"'" + ",\n";}
-            {fields = fields + " " + "'"+entry.getValue()+"'" + ",\n";}
+            {
+
+                fields = fields + " " + "'"+entry.getValue().replaceAll("\\*"," ")+"'" + ",\n";
+            }
             else {
                 {fields = fields + " " + "'NA'" + ",\n";}
             }
@@ -96,14 +101,47 @@ public class Db implements DbInterface {
 
     private boolean runSql(String sql){
         System.out.println("sql_debug=" + sql);
-        try (Connection conn = DriverManager.getConnection(url);
-             Statement stmt = conn.createStatement()) {
+        try (Connection conn = connect();
+             Statement stmt = conn.createStatement()
+        ) {
             stmt.execute(sql);
             return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
         }
+    }
+
+    public int getQueryResultToStings(String sql){
+       // String sql = "SELECT id, name, capacity FROM warehouses";
+        int total = -1;
+        try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)) {
+            // loop through the result set
+            while (rs.next()) {
+                total= rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return total;
+    }
+
+
+
+    /**
+     * Connect to the test.db database
+     * @return the Connection object
+     */
+    private Connection connect() {
+                Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return conn;
     }
 
 

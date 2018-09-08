@@ -64,7 +64,7 @@ public class KingCounty {
             base.sleep(3500);
            // base.isElementOnPage(By.xpath(settings.getPathToLastElement()));
         }
-       // Map<String, String> permMap = base.getTexts(settings.getPermanentMap());
+        Map<String, String> permMap = base.getTexts(settings.getPermanentMap());
        // Map<String, String> varMap = base.getTexts(settings.getVariableMap());
         Map<String, String> linksMap = base.getLinks(settings.getLinksMap());
         String timeStamp = ZonedDateTime.now().format(DateTimeFormatter.RFC_1123_DATE_TIME);
@@ -83,9 +83,13 @@ public class KingCounty {
 
         Db mydb = new Db();
         mydb.createNewDatabase("test.db");
+        Map allPerm =  new HashMap<>(permMap);
+       // allPerm.putAll(permMap);
+      //  allPerm.putAll(addlDataMap);
         mydb.createNewTable("permanentData", addlDataMap);
         mydb.addData("permanentData", addlDataMap);
-
+        mydb.isPermanentDataExist(addlDataMap);
+// TODO replace characters non sql
         //TODO replace sleep
         //http://www.sqlitetutorial.net/sqlite-java/
 
