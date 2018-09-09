@@ -96,14 +96,16 @@ public class Settings {
             AdditionalDataMap2 = new HashMap<String, String>();
             AdditionalDataMap2.put("Jurisdiction", "Jurisdiction");
             AdditionalDataMap2.put("SiteAddress", "Site Address");
-            AdditionalDataMap2.put("Percentage Unusable", "Percentage Unusable");
+            AdditionalDataMap2.put("PercentageUnusable", "Percentage Unusable");
             AdditionalDataMap2.put("RestrictiveSizeShape", "Restrictive Size Shape");
             AdditionalDataMap2.put("Zoning", "Zoning");
             AdditionalDataMap2.put("Water", "Water");
             AdditionalDataMap2.put("SewerSeptic", "Sewer/Septic");
-            AdditionalDataMap2.put("Road Access", "Road Access");
+            AdditionalDataMap2.put("RoadAccess", "Road Access");
             AdditionalDataMap2.put("Parking", "Parking");
             AdditionalDataMap2.put("StreetSurface", "Street Surface");
+            AdditionalDataMap2.put("Unbuildable", "Unbuildable");
+
 
 
 

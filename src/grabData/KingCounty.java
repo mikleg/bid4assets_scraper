@@ -78,17 +78,21 @@ public class KingCounty {
             WebElement elt = driver.findElement(By.xpath(settings.getPathToAddnlData2()));
             elt.click();
         }
-        driver.close();
-        //Map<String, String> addlDataMap2 = base.getTextsBySiblingsText(settings.getAdditionalDataMap2(), ".//td[2]");
 
+        Map<String, String> addlDataMap2 = base.getTextsBySiblingsText(settings.getAdditionalDataMap2(), ".//td[2]");
+        driver.close();
         Db mydb = new Db();
         mydb.createNewDatabase("test.db");
         Map allPerm =  new HashMap<>(permMap);
-       // allPerm.putAll(permMap);
-      //  allPerm.putAll(addlDataMap);
-        mydb.createNewTable("permanentData", addlDataMap);
-        mydb.addData("permanentData", addlDataMap);
-        mydb.isPermanentDataExist(addlDataMap);
+        allPerm.putAll(addlDataMap);
+        allPerm.putAll(addlDataMap2);
+
+        mydb.createNewTable("permanentData", allPerm);
+/*      mydb.addData("permanentData", addlDataMap);
+        mydb.isPermanentDataExist(addlDataMap);*/
+        mydb.addData("permanentData", allPerm);
+        mydb.isPermanentDataExist(allPerm);
+
 // TODO replace characters non sql
         //TODO replace sleep
         //http://www.sqlitetutorial.net/sqlite-java/

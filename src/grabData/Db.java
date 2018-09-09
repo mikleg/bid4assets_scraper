@@ -35,12 +35,6 @@ public class Db implements DbInterface {
     }
     public  void createNewTable(String name, Map<String, String> map) {
 
-        // SQL statement for creating a new table
-/*        String fields ="";
-        for (Map.Entry<String, String> entry : map.entrySet()) {
-
-            fields = fields + " " + entry.getKey() + " text,\n";
-        }*/
 
         String sql = "CREATE TABLE IF NOT EXISTS " + name + " (\n"
                 + "	id integer PRIMARY KEY,\n"
@@ -90,7 +84,7 @@ public class Db implements DbInterface {
            // {fields = fields + " " + "'"+entry.getValue().replaceAll("\\s","")+"'" + ",\n";}
             {
 
-                fields = fields + " " + "'"+entry.getValue().replaceAll("\\*"," ")+"'" + ",\n";
+                fields = fields + " " + "'"+entry.getValue().replaceAll("'"," ")+"'" + ",\n";
             }
             else {
                 {fields = fields + " " + "'NA'" + ",\n";}
