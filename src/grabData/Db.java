@@ -1,7 +1,6 @@
 package grabData;
 
 import java.sql.*;
-import java.util.HashMap;
 import java.util.Map;
 
 public class Db implements DbInterface {
@@ -25,14 +24,25 @@ public class Db implements DbInterface {
     public boolean isTableExist(String table){
         return false;
     }
-    public boolean isPermanentDataExist(Map<String, String> map){
+/*    public boolean isPermanentDataExist(Map<String, String> map){
         //TODO replace parcelNumber
         String aucnumb = map.get("parcelNumber");
         String sql = "SELECT COUNT(*) FROM permanentData WHERE parcelNumber ='" + aucnumb + "' ;";
-        System.out.println(getQueryResultToStings(sql));
+        System.out.println(getQueryResultToInt(sql));
+        int res = getQueryResultToInt(sql);
+        return res > 0;
+    }*/
 
-        return false;
+    public boolean isPermanentDataExist(Map<String, String> map){
+        //TODO replace parcelNumber
+        String aucnumb = map.get("aPN");
+        String sql = "SELECT COUNT(*) FROM permanentData WHERE aPN ='" + aucnumb + "' ;";
+        System.out.println(getQueryResultToInt(sql));
+        int res = getQueryResultToInt(sql);
+        return res > 0;
     }
+
+
     public  void createNewTable(String name, Map<String, String> map) {
 
 
@@ -57,6 +67,11 @@ public class Db implements DbInterface {
     }
     public void changeVariableData(Map<String, String> map){
 
+    }
+
+    public boolean checkVariableData(Map<String, String> map){
+
+        return false;
     }
 
     private String getFieldsText(Map<String, String> map){
@@ -106,7 +121,7 @@ public class Db implements DbInterface {
         }
     }
 
-    public int getQueryResultToStings(String sql){
+    public int getQueryResultToInt(String sql){
        // String sql = "SELECT id, name, capacity FROM warehouses";
         int total = -1;
         try (Connection conn = this.connect();
@@ -121,8 +136,6 @@ public class Db implements DbInterface {
         }
         return total;
     }
-
-
 
     /**
      * Connect to the test.db database
