@@ -47,7 +47,6 @@ public class Db implements DbInterface {
 
     public  void createNewTable(String name, Map<String, String> map) {
 
-
         String sql = "CREATE TABLE IF NOT EXISTS " + name + " (\n"
                 + "	id integer PRIMARY KEY,\n"
                 //  + fields.substring(0, fields.length()-2)
@@ -56,9 +55,8 @@ public class Db implements DbInterface {
                 + ");";
         runSql(sql);
     }
+
     public void addData(String tableName, Map<String, String> map){
-        //String aucnumb = map.get("b4aNumber");
-        //String sql = "SELECT COUNT b4aNumber FROM permanentData WHERE b4aNumber =" + aucnumb + " ;";
 
         String sql = "INSERT INTO " + tableName + " (\n"
                 + getFields(map) +")"
@@ -69,15 +67,32 @@ public class Db implements DbInterface {
     }
 
     public void addVariableData(String tableName, Map<String, String> map){
-        //String aucnumb = map.get("b4aNumber");
-        //String sql = "SELECT COUNT b4aNumber FROM permanentData WHERE b4aNumber =" + aucnumb + " ;";
-       // map.put("timeStamp", ZonedDateTime.now().format(DateTimeFormatter.RFC_1123_DATE_TIME));
+        //TODO add into timeStamp table only
+        String aPN = map.get("aPN");
         String sql = "INSERT INTO " + tableName + " (\n"
                 + getFields(map) +", 'timeStamp')"
                 + " VALUES\n" +
                 " (\n" +
                 getValues(map) + ", DATETIME('now'));";
         runSql(sql);
+        sql = "INSERT INTO " + "timeStamp" + " (\n"
+               + " 'timeStamp' , 'aPN')"
+                + " VALUES\n" +
+                " (\n" +
+                 "DATETIME('now'), '" + aPN +  "');";
+        runSql(sql);
+
+    }
+
+
+  //it checks variable data and if it si not changed -- adds new timeStamp into table timestamps
+    public void checkVariableData(String tableName, Map<String, String> map){
+        String aucnumb = map.get("aPN");
+        String sql = "SELECT * FROM timeStamp WHERE aPN ='" + aucnumb + "' ORDER BY 'timeStamp' DESC LIMIT 1;";
+        System.out.println(getQueryResultToInt(sql));
+        String  res = getQueryResultToString(sql);
+
+
     }
 
 
@@ -170,6 +185,24 @@ public class Db implements DbInterface {
             System.out.println(e.getMessage());
         }
         return total;
+    }
+
+    public String  getQueryResultToString(String sql){
+        String res= "";
+        try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)) {
+/*                ResultSetMetaData metadata = rs.getMetaData();
+                int columnCount = metadata.getColumnCount();*/
+            // loop through the result set
+            while (rs.next()) {
+
+                res= rs.getString("timeStamp");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return res;
     }
 
     /**

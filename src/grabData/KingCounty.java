@@ -65,6 +65,11 @@ public class KingCounty {
         }
         Map<String, String> permMap = base.getTexts(settings.getPermanentMap());
         Map<String, String> varMap = base.getTexts(settings.getVariableMap());
+        varMap.put("timeStamp", "");
+        varMap.put("aPN", permMap.get("aPN"));
+        Map<String, String> timeStampMap = new HashMap<>();
+        timeStampMap.put("aPN", permMap.get("aPN"));
+        timeStampMap.put("timeStamp", " ");
        // varMap.put("timeStamp", " ");
         Map<String, String> linksMap = base.getLinks(settings.getLinksMap());
         String timeStamp = ZonedDateTime.now().format(DateTimeFormatter.RFC_1123_DATE_TIME);
@@ -89,12 +94,13 @@ public class KingCounty {
 
         mydb.createNewTable("permanentData", allPerm);
         mydb.createNewTable("variableData", varMap);
+        mydb.createNewTable("timeStamp", timeStampMap);
 /*      mydb.addData("permanentData", addlDataMap);
         mydb.isPermanentDataExist(addlDataMap);*/
         mydb.addData("permanentData", allPerm);
         mydb.isPermanentDataExist(allPerm);
         mydb.addVariableData("variableData", varMap);
-
+//TODO remove one timestamp from variable data
 // TODO replace characters non sql
         //TODO replace sleep
         //http://www.sqlitetutorial.net/sqlite-java/

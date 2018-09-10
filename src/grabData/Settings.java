@@ -21,6 +21,9 @@ public class Settings {
     private Map<String,String> LinksDataMap;
     private Map<String,String> AdditionalDataMap;
     private Map<String,String> AdditionalDataMap2;
+    private Map<String,String> timeStamp;
+
+
     public Map<String,String> getPermanentMap(){
         if(PermanentDataMap == null || PermanentDataMap.isEmpty()){
             PermanentDataMap = new HashMap<String, String>();
@@ -54,7 +57,7 @@ public class Settings {
             VariableDataMap.put("numberOfBids", "//*[@id=\"num-bids-block\"]");
             VariableDataMap.put("closesIn", "//*[@id=\"time-remaining-block\"]");
             VariableDataMap.put("pageViews", "//*[@id=\"auction-detail-page-views\"]");
-           // VariableDataMap.put("timestamp", "");
+            //VariableDataMap.put("timestamp", "");
         }
         return  VariableDataMap;
 
@@ -62,13 +65,22 @@ public class Settings {
 
     public Map<String,String> getLinksMap(){
         if(LinksDataMap == null || LinksDataMap.isEmpty()){
-              LinksDataMap = new HashMap<String, String>();
-              LinksDataMap.put("gIS", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[5]/td[2]/a");
-              LinksDataMap.put("assessorInfo", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[6]/td[2]/li[1]/a");
-              LinksDataMap.put("titleReport", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[6]/td[2]/li[2]/a");
+            LinksDataMap = new HashMap<String, String>();
+            LinksDataMap.put("gIS", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[5]/td[2]/a");
+            LinksDataMap.put("assessorInfo", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[6]/td[2]/li[1]/a");
+            LinksDataMap.put("titleReport", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[6]/td[2]/li[2]/a");
         }
         return  LinksDataMap;
 
+    }
+
+    public Map<String,String> getTimestampMap(){
+        if(timeStamp == null || timeStamp.isEmpty()){
+            timeStamp = new HashMap<String, String>();
+            timeStamp.put("timeStamp", " ");
+            timeStamp.put("aPN", " ");
+        }
+        return  timeStamp;
     }
 
 
