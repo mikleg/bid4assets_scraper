@@ -1,6 +1,8 @@
 package grabData;
 
 import java.sql.*;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 public class Db implements DbInterface {
@@ -65,14 +67,47 @@ public class Db implements DbInterface {
                 getValues(map) +");";
         runSql(sql);
     }
+
+    public void addVariableData(String tableName, Map<String, String> map){
+        //String aucnumb = map.get("b4aNumber");
+        //String sql = "SELECT COUNT b4aNumber FROM permanentData WHERE b4aNumber =" + aucnumb + " ;";
+       // map.put("timeStamp", ZonedDateTime.now().format(DateTimeFormatter.RFC_1123_DATE_TIME));
+        String sql = "INSERT INTO " + tableName + " (\n"
+                + getFields(map) +", 'timeStamp')"
+                + " VALUES\n" +
+                " (\n" +
+                getValues(map) + ", DATETIME('now'));";
+        runSql(sql);
+    }
+
+
+
+
+
+
     public void changeVariableData(Map<String, String> map){
 
     }
 
+/*
+    // it returns if variableDataChanged
     public boolean checkVariableData(Map<String, String> map){
-
+        String aucnumb = map.get("aPN");
+        String sql = "SELECT COUNT(*) FROM permanentData WHERE aPN ='" + aucnumb + "' ;";
+        System.out.println(getQueryResultToInt(sql));
         return false;
     }
+*/
+
+
+/*    public boolean isPermanentDataExist(Map<String, String> map){
+        //TODO replace parcelNumber
+        String aucnumb = map.get("aPN");
+        String sql = "SELECT COUNT(*) FROM permanentData WHERE aPN ='" + aucnumb + "' ;";
+        System.out.println(getQueryResultToInt(sql));
+        int res = getQueryResultToInt(sql);
+        return res > 0;
+    }*/
 
     private String getFieldsText(Map<String, String> map){
         String fields ="";
