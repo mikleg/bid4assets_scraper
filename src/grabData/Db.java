@@ -3,6 +3,7 @@ package grabData;
 import java.sql.*;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Db implements DbInterface {
@@ -67,7 +68,8 @@ public class Db implements DbInterface {
     }
 
     public void addVariableData(String tableName, Map<String, String> map){
-        //TODO add into timeStamp table only
+        //TO DO add into timeStamp table only
+        //TODO replace string in tamestamp on normal time format
         String aPN = map.get("aPN");
         String sql = "INSERT INTO " + tableName + " (\n"
                 + getFields(map) +", 'timeStamp')"
@@ -87,16 +89,25 @@ public class Db implements DbInterface {
 
   //it checks variable data and if it si not changed -- adds new timeStamp into table timestamps
     public void checkVariableData(String tableName, Map<String, String> map){
-        String aucnumb = map.get("aPN");
-        String sql = "SELECT * FROM timeStamp WHERE aPN ='" + aucnumb + "' ORDER BY 'timeStamp' DESC LIMIT 1;";
+         String aucnumb = map.get("aPN");
+        String sql = "SELECT * FROM timeStamp WHERE aPN ='" + aucnumb + "' ORDER BY datetime(timeStamp) DESC LIMIT 1;";
         System.out.println(getQueryResultToInt(sql));
-        String  res = getQueryResultToString(sql);
+        String  timestamp = getQueryResultToString(sql);
+        System.out.println(timestamp);
+        sql = "SELECT * FROM variableData WHERE aPN ='" + aucnumb + "' AND timeStamp =  '" + timestamp + "';";
+        System.out.println(sql);
+        Map<String, String> dbMap = getQueryResultToMap(sql, "variableData");
+        String fields ="";
+        String values ="";
+        for (Map.Entry<String, String> entry : dbMap.entrySet()) {
+
+            fields = fields + " " + entry.getKey() + ",\n";
+            values = values + " " + entry.getValue() + ",\n";
+            System.out.println("Key=" + entry.getKey() + " value" + entry.getValue());
+        }
 
 
     }
-
-
-
 
 
 
@@ -203,6 +214,31 @@ public class Db implements DbInterface {
             System.out.println(e.getMessage());
         }
         return res;
+    }
+
+    public Map<String, String>  getQueryResultToMap(String sql, String tablename){
+        //TODO find bug
+        //String res= "";
+        HashMap<String,String> resMap = new HashMap<>();
+        try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+
+                ResultSetMetaData metadata = rs.getMetaData();
+
+                int columnCount = metadata.getColumnCount();
+                // loop through the result set
+                for(int i  = columnCount; i > 0; i--){
+                    resMap.put(metadata.getColumnName(i), rs.getString(i) );
+
+                }
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return resMap;
     }
 
     /**

@@ -101,6 +101,7 @@ public class KingCounty {
         mydb.addData("permanentData", allPerm);
         mydb.isPermanentDataExist(allPerm);
         varMap.remove("timeStamp");
+        mydb. checkVariableData("variableData", timeStampMap);
         mydb.addVariableData("variableData", varMap);
 //TODO check why dosen't work timestamp in variable data
 // TODO replace characters non sql
