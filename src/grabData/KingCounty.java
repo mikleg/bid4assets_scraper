@@ -92,6 +92,7 @@ public class KingCounty {
         allPerm.putAll(addlDataMap);
         allPerm.putAll(addlDataMap2);
 
+        varMap.put("timeStamp", "na");
         mydb.createNewTable("permanentData", allPerm);
         mydb.createNewTable("variableData", varMap);
         mydb.createNewTable("timeStamp", timeStampMap);
@@ -99,8 +100,9 @@ public class KingCounty {
         mydb.isPermanentDataExist(addlDataMap);*/
         mydb.addData("permanentData", allPerm);
         mydb.isPermanentDataExist(allPerm);
+        varMap.remove("timeStamp");
         mydb.addVariableData("variableData", varMap);
-//TODO remove one timestamp from variable data
+//TODO check why dosen't work timestamp in variable data
 // TODO replace characters non sql
         //TODO replace sleep
         //http://www.sqlitetutorial.net/sqlite-java/
