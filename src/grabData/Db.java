@@ -88,27 +88,50 @@ public class Db implements DbInterface {
 
 
   //it checks variable data and if it si not changed -- adds new timeStamp into table timestamps
-    public void checkVariableData(String tableName, Map<String, String> map){
-         String aucnumb = map.get("aPN");
+    public boolean checkVariableData(Map<String, String> map){
+        String aucnumb = map.get("aPN");
+
+        if(getQueryResultToInt("SELECT COUNT(*) FROM timeStamp WHERE aPN ='" + aucnumb + "' ;") == 0){
+            addVariableData("variableData", map);
+            return true;
+        }
+
         String sql = "SELECT * FROM timeStamp WHERE aPN ='" + aucnumb + "' ORDER BY datetime(timeStamp) DESC LIMIT 1;";
-        System.out.println(getQueryResultToInt(sql));
         String  timestamp = getQueryResultToString(sql);
-        System.out.println(timestamp);
+        System.out.println("debug timestamp=" + timestamp);
         sql = "SELECT * FROM variableData WHERE aPN ='" + aucnumb + "' AND timeStamp =  '" + timestamp + "';";
         System.out.println(sql);
         Map<String, String> dbMap = getQueryResultToMap(sql, "variableData");
         String fields ="";
         String values ="";
-        for (Map.Entry<String, String> entry : dbMap.entrySet()) {
+        boolean isItChanged = false;
+        for (Map.Entry<String, String> entry : map.entrySet()) {
 
             fields = fields + " " + entry.getKey() + ",\n";
             values = values + " " + entry.getValue() + ",\n";
+            System.out.println("Debug check variable data" );
             System.out.println("Key=" + entry.getKey() + " value" + entry.getValue());
+            if ((!entry.getValue().equals(dbMap.get(entry.getKey())))
+                    && (!entry.getKey().equals("pageViews"))
+                    && (!entry.getKey().equals("closesIn"))
+                    ){
+                isItChanged = true;
+            }
         }
-
-
+        if(isItChanged){
+            addVariableData("variableData", map);
+        }
+        else {
+            String aPN = map.get("aPN");
+            sql = "INSERT INTO " + "timeStamp" + " (\n"
+                    + " 'timeStamp' , 'aPN')"
+                    + " VALUES\n" +
+                    " (\n" +
+                    "DATETIME('now'), '" + aPN +  "');";
+            runSql(sql);
+        }
+        return isItChanged;
     }
-
 
 
     public void changeVariableData(Map<String, String> map){

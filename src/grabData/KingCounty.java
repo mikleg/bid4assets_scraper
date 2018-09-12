@@ -41,9 +41,9 @@ public class KingCounty {
         base.elementClick(aucs.get(3), "auc click:" );
         lots = base.getElements(aucs.get(3), settings.getPathToLots(), " get lots");
         System.out.println("debug:" + lots.size());
-        if(base.isElementOnPage(lots.get(3))){
+        if(base.isElementOnPage(lots.get(4))){
 
-          lot = base.getElement(lots.get(3),"//*[" + 3 + "]" + settings.getPathToLot(), "get lot");
+          lot = base.getElement(lots.get(4),"//*[" + 4 + "]" + settings.getPathToLot(), "get lot");
             base.elementClick(lot, "click lot");
             gatherDataPage();
 
@@ -101,8 +101,8 @@ public class KingCounty {
         mydb.addData("permanentData", allPerm);
         mydb.isPermanentDataExist(allPerm);
         varMap.remove("timeStamp");
-        mydb. checkVariableData("variableData", timeStampMap);
-        mydb.addVariableData("variableData", varMap);
+        mydb.checkVariableData(varMap);
+       // mydb.addVariableData("variableData", varMap);
 //TODO check why dosen't work timestamp in variable data
 // TODO replace characters non sql
         //TODO replace sleep

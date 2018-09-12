@@ -58,6 +58,7 @@ public class Settings {
             VariableDataMap.put("numberOfBids", "//*[@id=\"num-bids-block\"]");
             VariableDataMap.put("closesIn", "//*[@id=\"time-remaining-block\"]");
             VariableDataMap.put("pageViews", "//*[@id=\"auction-detail-page-views\"]");
+            VariableDataMap.put("auctionType", "//*[@id=\"auction-right-panel\"]/div[2]/table/tbody/tr[2]/td");
             //VariableDataMap.put("timestamp", "");
         }
         return  VariableDataMap;
