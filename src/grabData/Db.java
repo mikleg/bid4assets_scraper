@@ -17,12 +17,14 @@ public class Db implements DbInterface {
                 DatabaseMetaData meta = conn.getMetaData();
                 System.out.println("The driver name is " + meta.getDriverName());
                 System.out.println("A new database has been created.");
+
             }
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
+
 
     public boolean isTableExist(String table){
         return false;
@@ -98,24 +100,25 @@ public class Db implements DbInterface {
 
         String sql = "SELECT * FROM timeStamp WHERE aPN ='" + aucnumb + "' ORDER BY datetime(timeStamp) DESC LIMIT 1;";
         String  timestamp = getQueryResultToString(sql);
-        System.out.println("debug timestamp=" + timestamp);
+       // System.out.println("debug timestamp=" + timestamp);
         sql = "SELECT * FROM variableData WHERE aPN ='" + aucnumb + "' AND timeStamp =  '" + timestamp + "';";
-        System.out.println(sql);
+       // System.out.println(sql);
         Map<String, String> dbMap = getQueryResultToMap(sql, "variableData");
-        String fields ="";
-        String values ="";
+      //  String fields ="";
+     //   String values ="";
         boolean isItChanged = false;
         for (Map.Entry<String, String> entry : map.entrySet()) {
 
-            fields = fields + " " + entry.getKey() + ",\n";
-            values = values + " " + entry.getValue() + ",\n";
-            System.out.println("Debug check variable data" );
-            System.out.println("Key=" + entry.getKey() + " value" + entry.getValue());
+          //  fields = fields + " " + entry.getKey() + ",\n";
+           // values = values + " " + entry.getValue() + ",\n";
+            //System.out.println("Debug check variable data" );
+            //System.out.println("Key=" + entry.getKey() + " value" + entry.getValue());
             if ((!entry.getValue().equals(dbMap.get(entry.getKey())))
                     && (!entry.getKey().equals("pageViews"))
                     && (!entry.getKey().equals("closesIn"))
                     ){
                 isItChanged = true;
+                System.out.println("Debug isItChanged = true Key=" + entry.getKey() + " value" + entry.getValue());
             }
         }
         if(isItChanged){
@@ -193,11 +196,12 @@ public class Db implements DbInterface {
     }
 
     private boolean runSql(String sql){
-        System.out.println("sql_debug=" + sql);
+       // System.out.println("sql_debug=" + sql);
         try (Connection conn = connect();
              Statement stmt = conn.createStatement()
         ) {
             stmt.execute(sql);
+            //conn.close();
             return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -215,6 +219,7 @@ public class Db implements DbInterface {
             while (rs.next()) {
                 total= rs.getInt(1);
             }
+           // conn.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -232,6 +237,7 @@ public class Db implements DbInterface {
             while (rs.next()) {
 
                 res= rs.getString("timeStamp");
+               // conn.close();
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -257,7 +263,7 @@ public class Db implements DbInterface {
 
                 }
             }
-
+           //conn.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

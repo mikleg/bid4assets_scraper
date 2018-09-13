@@ -6,8 +6,8 @@ import org.openqa.selenium.WebElement;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
@@ -16,53 +16,114 @@ public class KingCounty {
     String driverBrowser = "chrome";
     WebDriver driver;
     Settings settings;
+    Db mydb;
+    WebElement lot;
+    List<WebElement> lots;
+    List<String> allLots = new ArrayList<String>() ;
 
     public void runScraper(){
         base = new Base();
-        driver = base.getNewDriver(driverBrowser);
+        mydb = new Db();
+
         settings = new Settings();
-        driver.get(settings.getMainUrl());
+
+        mydb.createNewDatabase("test.db");
       //local//
         WebElement plus;
-        List<WebElement> lots;
-        WebElement lot;
+
+        //WebElement lot;
       //end local//
+        for (int k=0; k < 11; k++) {
+            driver = base.getNewDriver(driverBrowser);
+            driver.get(settings.getMainUrl());
+
+
         if (base.isElementOnPage(By.xpath(settings.getPathToPlus()))){
             plus = driver.findElement(By.xpath(settings.getPathToPlus()));
             base.elementClick(plus, "plus");
         }
-        //--doneTODO Check length before click
-        // TO DO check all data fields
-        //TO DO ADD gathering links
-        //TODO Add gathering docs
-        //TODO Add gathering screensoots
-        //TO DO timestamps
+
         List<WebElement> aucs = base.getListByXpath(settings.getPathToAucs(), " get aucs");
-        base.elementClick(aucs.get(3), "auc click:" );
+
+        //base.sleep(1800);
+
+            base.elementClick(aucs.get(k), "auc click:");
+            base.sleep(1800);
+            lots = base.getElements(aucs.get(k), settings.getPathToLots(), " get lots");
+         /*   WebElement debug1 =  base.getElement(lots.get(0),"//*[" + 1 + "]" + settings.getPathToLot(), "get lot");
+            WebElement debug2 =  base.getElement(lots.get(18),"//*[" + 19 + "]" + settings.getPathToLot(), "get lot");
+            String t1 = debug1.getAttribute("href");
+            String t2 = debug2.getAttribute("href");
+*/            for (int j=0; j < lots.size(); j ++)
+               // gatherAuc(j,  lots);
+            {
+                if(base.isElementOnPage(lots.get(j))){
+                    lot = base.getElement(lots.get(j),"//*[" + (j+1) + "]" + settings.getPathToLot(), "get lot");
+                    allLots.add(lot.getAttribute("href"));
+                }
+
+            }
+
+            driver.close();
+
+            //TODO find every row by xpath and extract links
+
+
+        }
+/*        for (WebElement lotik:lots
+                ) {
+            otsL.add( lotik.getAttribute("href"));
+        }*/
+/*        lots = base.getElements(aucs.get(0), settings.getPathToLots(), " get lots");
+        for (int j=1; j < lots.size(); j ++)
+            gatherAuc(j,  lots);*/
+
+/*        for (int k=0; k < aucs.size(); k++){
+            base.elementClick(aucs.get(k), "auc click:" );
+            lots = base.getElements(aucs.get(k), settings.getPathToLots(), " get lots");
+            System.out.println("debug:" + lots.size());
+                for (int j=1; j < lots.size(); j ++)
+            gatherAuc(j,  lots);
+        }*/
+
+
+   /*     base.elementClick(aucs.get(3), "auc click:" );
         lots = base.getElements(aucs.get(3), settings.getPathToLots(), " get lots");
         System.out.println("debug:" + lots.size());
-        if(base.isElementOnPage(lots.get(4))){
+        gatherAuc(4,  lots);*/
+        //driver.close();
+        int debug = 1;
+        for (String link:
+             allLots) {
+            gatherDataPage(link, false);
 
-          lot = base.getElement(lots.get(4),"//*[" + 4 + "]" + settings.getPathToLot(), "get lot");
+        }
+    }
+
+/*
+    private void gatherAuc(int num, List<WebElement> lots){
+        if(base.isElementOnPage(lots.get(num))){
+
+            lot = base.getElement(lots.get(num),"//*[" + num + "]" + settings.getPathToLot(), "get lot");
             base.elementClick(lot, "click lot");
             gatherDataPage();
 
-
-
-        //driver.navigate().back();
+            //driver.navigate().back();
 
         }
-
-
     }
+*/
+
+
         //private getAucInfo()
-    private void gatherDataPage(){
+    private void gatherDataPage(String aucUrl, boolean useAddl){
         //TO DO replace on wait
-        base.sleep(500);
+        driver = base.getNewDriver(driverBrowser);
+        driver.get(aucUrl);
+        base.sleep(800);
         if(!base.isElementOnPage(By.xpath(settings.getPathToLastElement()))){
             base.sleep(3500);
-           // base.isElementOnPage(By.xpath(settings.getPathToLastElement()));
-        }
+           }
         Map<String, String> permMap = base.getTexts(settings.getPermanentMap());
         Map<String, String> varMap = base.getTexts(settings.getVariableMap());
         varMap.put("timeStamp", "");
@@ -70,40 +131,47 @@ public class KingCounty {
         Map<String, String> timeStampMap = new HashMap<>();
         timeStampMap.put("aPN", permMap.get("aPN"));
         timeStampMap.put("timeStamp", " ");
-       // varMap.put("timeStamp", " ");
         Map<String, String> linksMap = base.getLinks(settings.getLinksMap());
-        String timeStamp = ZonedDateTime.now().format(DateTimeFormatter.RFC_1123_DATE_TIME);
+        //String timeStamp = ZonedDateTime.now().format(DateTimeFormatter.RFC_1123_DATE_TIME);
         String url = driver.getCurrentUrl();
-        System.out.println(timeStamp);
+        permMap.put("url", url);
+        //System.out.println(timeStamp);
         System.out.println(url);
-        driver.navigate().to(linksMap.get("assessorInfo"));
-        base.sleep(2500);
-        Map<String, String> addlDataMap = base.getTextsBySiblingsText(settings.getAdditionalDataMap(), ".//td[2]");
-        if(base.isElementOnPage(By.xpath(settings.getPathToAddnlData2()))){
-            WebElement elt = driver.findElement(By.xpath(settings.getPathToAddnlData2()));
-            elt.click();
+        Map allPerm =  new HashMap<>(permMap);
+        if(useAddl){
+            driver.navigate().to(linksMap.get("assessorInfo"));
+            base.sleep(2500);
+            Map<String, String> addlDataMap = base.getTextsBySiblingsText(settings.getAdditionalDataMap(), ".//td[2]");
+            if(base.isElementOnPage(By.xpath(settings.getPathToAddnlData2()))){
+                WebElement elt = driver.findElement(By.xpath(settings.getPathToAddnlData2()));
+                elt.click();
+            }
+
+            Map<String, String> addlDataMap2 = base.getTextsBySiblingsText(settings.getAdditionalDataMap2(), ".//td[2]");
+            allPerm.putAll(addlDataMap);
+            allPerm.putAll(addlDataMap2);
         }
 
-        Map<String, String> addlDataMap2 = base.getTextsBySiblingsText(settings.getAdditionalDataMap2(), ".//td[2]");
+        //driver.close();
+         //driver.navigate().back();
+        //driver.navigate().back();
+        //driver.navigate().back();
+        //driver.navigate().back();
         driver.close();
-        Db mydb = new Db();
-        mydb.createNewDatabase("test.db");
-        Map allPerm =  new HashMap<>(permMap);
-        allPerm.putAll(addlDataMap);
-        allPerm.putAll(addlDataMap2);
+        //mydb.createNewDatabase("test.db");
 
+
+        allPerm.putAll(linksMap);
         varMap.put("timeStamp", "na");
         mydb.createNewTable("permanentData", allPerm);
         mydb.createNewTable("variableData", varMap);
         mydb.createNewTable("timeStamp", timeStampMap);
-/*      mydb.addData("permanentData", addlDataMap);
-        mydb.isPermanentDataExist(addlDataMap);*/
-        mydb.addData("permanentData", allPerm);
-        mydb.isPermanentDataExist(allPerm);
+        if(!mydb.isPermanentDataExist(allPerm)){
+            mydb.addData("permanentData", allPerm);
+        }
         varMap.remove("timeStamp");
         mydb.checkVariableData(varMap);
-       // mydb.addVariableData("variableData", varMap);
-//TODO check why dosen't work timestamp in variable data
+//TO DO check why dosen't work timestamp in variable data
 // TODO replace characters non sql
         //TODO replace sleep
         //http://www.sqlitetutorial.net/sqlite-java/

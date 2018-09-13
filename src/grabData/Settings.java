@@ -33,7 +33,7 @@ public class Settings {
             PermanentDataMap.put("auctionStarts", "//*[@id=\"auction-right-panel\"]/div[3]/table/tbody/tr[7]/td");
             PermanentDataMap.put("auctionCloses", "//*[@id=\"actual-close-time-block\"]");
             PermanentDataMap.put("Deposit", "//*[@id=\"auction-right-panel\"]/div[3]/table/tbody/tr[11]/td");
-           // PermanentDataMap.put("url", "");
+            //PermanentDataMap.put("url", " ");
             PermanentDataMap.put("location", "//*[@id=\"auction-detail-left\"]/div[2]/table/tbody/tr[3]/td[2]");
             PermanentDataMap.put("aPN", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[2]/td[2]");
             PermanentDataMap.put("legalDescription", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[3]/td[2]");
