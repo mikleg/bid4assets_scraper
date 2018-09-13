@@ -62,6 +62,7 @@ public class Main {
 
         someAuc.click();*/
         KingCounty kingCounty = new KingCounty();
+        for (int i =0; i < 900; i++)
         kingCounty.runScraper();
 
         int debug = 0;

@@ -95,7 +95,7 @@ public class KingCounty {
         int debug = 1;
         for (String link:
              allLots) {
-            gatherDataPage(link, false);
+            gatherDataPage(link, true);
 
         }
     }
@@ -124,33 +124,51 @@ public class KingCounty {
         if(!base.isElementOnPage(By.xpath(settings.getPathToLastElement()))){
             base.sleep(3500);
            }
-        Map<String, String> permMap = base.getTexts(settings.getPermanentMap());
         Map<String, String> varMap = base.getTexts(settings.getVariableMap());
-        varMap.put("timeStamp", "");
-        varMap.put("aPN", permMap.get("aPN"));
-        Map<String, String> timeStampMap = new HashMap<>();
-        timeStampMap.put("aPN", permMap.get("aPN"));
-        timeStampMap.put("timeStamp", " ");
-        Map<String, String> linksMap = base.getLinks(settings.getLinksMap());
-        //String timeStamp = ZonedDateTime.now().format(DateTimeFormatter.RFC_1123_DATE_TIME);
-        String url = driver.getCurrentUrl();
-        permMap.put("url", url);
-        //System.out.println(timeStamp);
-        System.out.println(url);
-        Map allPerm =  new HashMap<>(permMap);
-        if(useAddl){
-            driver.navigate().to(linksMap.get("assessorInfo"));
-            base.sleep(2500);
-            Map<String, String> addlDataMap = base.getTextsBySiblingsText(settings.getAdditionalDataMap(), ".//td[2]");
-            if(base.isElementOnPage(By.xpath(settings.getPathToAddnlData2()))){
-                WebElement elt = driver.findElement(By.xpath(settings.getPathToAddnlData2()));
-                elt.click();
+       //
+        Map<String, String> varMap2 = base.getTextsBySiblingsText(settings.getVar2Map(), ".//td");
+        varMap.putAll(varMap2);
+        Map<String, String> shortMap = base.getTexts(settings.getShortMap());
+        if (varMap.get("auctionType").equals("None")){
+            Map<String, String> permMap = base.getTexts(settings.getPermanentMap());
+            Map<String, String> linksMap = base.getLinks(settings.getLinksMap());
+            String url = driver.getCurrentUrl();
+            permMap.put("url", url);
+            System.out.println(url);
+            Map allPerm =  new HashMap<>(permMap);
+            if(useAddl){
+                driver.navigate().to(linksMap.get("assessorInfo"));
+                base.sleep(2500);
+                Map<String, String> addlDataMap = base.getTextsBySiblingsText(settings.getAdditionalDataMap(), ".//td[2]");
+                if(base.isElementOnPage(By.xpath(settings.getPathToAddnlData2()))){
+                    WebElement elt = driver.findElement(By.xpath(settings.getPathToAddnlData2()));
+                    elt.click();
+                }
+
+                Map<String, String> addlDataMap2 = base.getTextsBySiblingsText(settings.getAdditionalDataMap2(), ".//td[2]");
+                allPerm.putAll(addlDataMap);
+                allPerm.putAll(addlDataMap2);
+                allPerm.putAll(linksMap);
+                mydb.createNewTable("permanentData", allPerm);
+                if(!mydb.isPermanentDataExist(allPerm)){
+                    mydb.addData("permanentData", allPerm);
+                }
             }
 
-            Map<String, String> addlDataMap2 = base.getTextsBySiblingsText(settings.getAdditionalDataMap2(), ".//td[2]");
-            allPerm.putAll(addlDataMap);
-            allPerm.putAll(addlDataMap2);
         }
+
+
+
+        varMap.put("timeStamp", "");
+        varMap.put("aPN", shortMap.get("aPN"));
+        Map<String, String> timeStampMap = new HashMap<>();
+        timeStampMap.put("aPN", shortMap.get("aPN"));
+        timeStampMap.put("timeStamp", " ");
+
+        //String timeStamp = ZonedDateTime.now().format(DateTimeFormatter.RFC_1123_DATE_TIME);
+
+        //System.out.println(timeStamp);
+
 
         //driver.close();
          //driver.navigate().back();
@@ -161,14 +179,12 @@ public class KingCounty {
         //mydb.createNewDatabase("test.db");
 
 
-        allPerm.putAll(linksMap);
+
         varMap.put("timeStamp", "na");
-        mydb.createNewTable("permanentData", allPerm);
+
         mydb.createNewTable("variableData", varMap);
         mydb.createNewTable("timeStamp", timeStampMap);
-        if(!mydb.isPermanentDataExist(allPerm)){
-            mydb.addData("permanentData", allPerm);
-        }
+
         varMap.remove("timeStamp");
         mydb.checkVariableData(varMap);
 //TO DO check why dosen't work timestamp in variable data

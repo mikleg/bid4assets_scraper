@@ -23,6 +23,8 @@ public class Settings {
     private Map<String,String> AdditionalDataMap;
     private Map<String,String> AdditionalDataMap2;
     private Map<String,String> timeStamp;
+    private Map<String,String> shortMap;
+    private Map<String,String> var2Map;
 
 
     public Map<String,String> getPermanentMap(){
@@ -48,6 +50,29 @@ public class Settings {
         return  PermanentDataMap;
 
     }
+
+    public Map<String,String> getShortMap(){
+        if(shortMap == null || shortMap.isEmpty()){
+            shortMap = new HashMap<String, String>();
+            shortMap.put("aPN", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[2]/td[2]");
+        }
+        return  shortMap;
+
+    }
+
+    public Map<String,String> getVar2Map(){
+        if(var2Map == null || var2Map.isEmpty()){
+            var2Map = new HashMap<String, String>();
+            var2Map.put("WinningBid:", "Winning Bid:");
+            var2Map.put("Winner:", "Winner:");
+            var2Map.put("AuctionStarted:", "Auction Started:");
+            var2Map.put("AuctionClosed:", "Auction Closed:");
+
+        }
+        return  var2Map;
+
+    }
+
 
     public Map<String,String> getVariableMap(){
         if(VariableDataMap == null || VariableDataMap.isEmpty()){
