@@ -63,10 +63,10 @@ public class Settings {
     public Map<String,String> getVar2Map(){
         if(var2Map == null || var2Map.isEmpty()){
             var2Map = new HashMap<String, String>();
-            var2Map.put("WinningBid:", "Winning Bid:");
-            var2Map.put("Winner:", "Winner:");
-            var2Map.put("AuctionStarted:", "Auction Started:");
-            var2Map.put("AuctionClosed:", "Auction Closed:");
+            var2Map.put("WinningBid", "Winning Bid:");
+            var2Map.put("Winner", "Winner:");
+            var2Map.put("AuctionStarted", "Auction Started:");
+            var2Map.put("AuctionClosed", "Auction Closed:");
 
         }
         return  var2Map;
@@ -84,6 +84,10 @@ public class Settings {
             VariableDataMap.put("closesIn", "//*[@id=\"time-remaining-block\"]");
             VariableDataMap.put("pageViews", "//*[@id=\"auction-detail-page-views\"]");
             VariableDataMap.put("auctionType", "//*[@id=\"auction-right-panel\"]/div[2]/table/tbody/tr[2]/td");
+            VariableDataMap.put("WinningBid", "//*[@id=\"auction-right-panel\"]/div[3]/table/tbody/tr[2]/td");
+            VariableDataMap.put("Winner", "//*[@id=\"auction-right-panel\"]/div[3]/table/tbody/tr[3]/td");
+            VariableDataMap.put("AuctionStarted", "//*[@id=\"auction-right-panel\"]/div[3]/table/tbody/tr[8]/td");
+            VariableDataMap.put("AuctionClosed", "//*[@id=\"actual-close-time-block\"]/span");
             //VariableDataMap.put("timestamp", "");
         }
         return  VariableDataMap;

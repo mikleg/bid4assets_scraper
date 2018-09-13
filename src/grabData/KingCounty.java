@@ -93,6 +93,7 @@ public class KingCounty {
         gatherAuc(4,  lots);*/
         //driver.close();
         int debug = 1;
+        gatherDataPage(allLots.get(3), true);
         for (String link:
              allLots) {
             gatherDataPage(link, true);
@@ -126,10 +127,10 @@ public class KingCounty {
            }
         Map<String, String> varMap = base.getTexts(settings.getVariableMap());
        //
-        Map<String, String> varMap2 = base.getTextsBySiblingsText(settings.getVar2Map(), ".//td");
-        varMap.putAll(varMap2);
+      //  Map<String, String> varMap2 = base.getTextsBySiblingsText(settings.getVar2Map(), ".//td");
+     //   varMap.putAll(varMap2);
         Map<String, String> shortMap = base.getTexts(settings.getShortMap());
-        if (varMap.get("auctionType").equals("None")){
+     //   if (varMap.get("auctionType").equals("None")){
             Map<String, String> permMap = base.getTexts(settings.getPermanentMap());
             Map<String, String> linksMap = base.getLinks(settings.getLinksMap());
             String url = driver.getCurrentUrl();
@@ -155,7 +156,7 @@ public class KingCounty {
                 }
             }
 
-        }
+       // }
 
 
 
