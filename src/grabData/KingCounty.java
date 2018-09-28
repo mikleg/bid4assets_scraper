@@ -33,43 +33,107 @@ public class KingCounty {
 
         //WebElement lot;
       //end local//
-        for (int k=0; k < 11; k++) {
-            driver = base.getNewDriver(driverBrowser);
-            driver.get(settings.getMainUrl());
+        driver = base.getNewDriver(driverBrowser);
+        driver.get(settings.getMainUrl());
+        for (int k=0; k < 5; k++) {
 
 
-        if (base.isElementOnPage(By.xpath(settings.getPathToPlus()))){
-            plus = driver.findElement(By.xpath(settings.getPathToPlus()));
-            base.elementClick(plus, "plus");
-        }
 
-        List<WebElement> aucs = base.getListByXpath(settings.getPathToAucs(), " get aucs");
+            if (base.isElementOnPage(By.xpath(settings.getPathToPlus()))) {
+                //plus = driver.findElement(By.xpath(settings.getPathToPlus()));
+                plus = driver.findElement(By.xpath(settings.getPathToPlus()));
+                //#auction-folders-wp
+                // plus = driver.findElement(By.id("auction-folders-wp"));
+                // plus = base.getElementByText("Auction Folders", "");
+                base.sleep(1100);
+                List<WebElement> aucs = base.getListByXpath(settings.getPathToAucs(), " get aucs");
+                if (!aucs.get(0).isDisplayed()) {
+                    base.elementClick(plus, "plus");
+                    aucs = base.getListByXpath(settings.getPathToAucs(), " get aucs");
+                    boolean aaaaa = aucs.get(0).isDisplayed();
+                }
+                //TODo check that plus is not clicked
+                //       try {
+                //   List<WebElement> aucs_debug1 = base.getListByXpath(settings.getPathToAucs(), " get aucs");
+                //       }
 
-        //base.sleep(1800);
+
+                // boolean aaa =  base.isElementOnPage(By.xpath( "//*[@for=\"ac-2913\"]"));
+            }
+
+            List<WebElement> aucs = base.getListByXpath(settings.getPathToAucs(), " get aucs");
+            // int debug =1;
+            // List<WebElement> aucs = base.getListByXpath(settings.getPathToAucs(), " get aucs");
+            //   boolean aaaaaf = aucs.get(0).isDisplayed();
+
+
+            //*[@id="folderListView"]/div[1]/label
+
+            //base.sleep(1800);
 
             base.elementClick(aucs.get(k), "auc click:");
             base.sleep(1800);
-            lots = base.getElements(aucs.get(k), settings.getPathToLots(), " get lots");
+        }
+
+
+
+          //  List<WebElement> aucs = base.getListByXpath(settings.getPathToAucs(), " get aucs");
+          //  for(int s =0; s < aucs.size(); s++){
+
+          //  }
+
+
+            //lots = base.getElements(aucs.get(4), settings.getPathToLots(), " get lots");
+           //  WebElement lotik = driver.findElement(By.xpath("//*[@for=\"ac-2914\"]"));
+             //WebElement lotik = base.getListByXpath(   base."//*[@for=\"ac-2913\"]", "bkaka");
+           //  lots =  base.getElements(lotik,  settings.getPathToLots(), " get lots");
          /*   WebElement debug1 =  base.getElement(lots.get(0),"//*[" + 1 + "]" + settings.getPathToLot(), "get lot");
             WebElement debug2 =  base.getElement(lots.get(18),"//*[" + 19 + "]" + settings.getPathToLot(), "get lot");
             String t1 = debug1.getAttribute("href");
             String t2 = debug2.getAttribute("href");
-*/            for (int j=0; j < lots.size(); j ++)
+            ////*[@id="auctionGrid-2915"]
+             //row //*[@id="auctionGrid-2915"]/table/tbody/tr[1]
+             //*[@id="auctionGrid-2915"]/table/tbody/tr[1]
+
+
+
+
+*/
+             int debug4=1;
+             for (int l=0; l < 5; l++){
+                 for (int j=1; j < 11; j ++){
+                     if (base.isElementOnPage(By.xpath(settings.getPathToLot(j, l)))){
+                         lot = driver.findElement(By.xpath(settings.getPathToLot(j, l)));
+                         allLots.add(lot.getAttribute("href"));
+                     }
+                 }
+             }
+
+/*             for (int j=0; j < 10; j ++)
                // gatherAuc(j,  lots);
             {
                 if(base.isElementOnPage(lots.get(j))){
-                    lot = base.getElement(lots.get(j),"//*[" + (j+1) + "]" + settings.getPathToLot(), "get lot");
+                  //  Integer k = j % 10;
+                  //  lot = base.getElement(lots.get(j),"//*[" + (k+1) + "]" + settings.getPathToLot(), "get lot");
+                //    Integer number = (k + 1);
+                  //  String pathTol = "//*[@id=\"auctionGrid-2915\"]"
+                  //          + "/table/tbody/tr[" + number.toString() + "]" + settings.getPathToLot();
+                    System.out.println("pathTol=" + settings.getPathToLot());
+                    lot = driver.findElement(By.xpath(pathTol));
                     allLots.add(lot.getAttribute("href"));
                 }
 
-            }
-
+            }*/
+        //*[@id="folderListView"]/div[1]/label
+//*[@id="auctionGrid-2913"]/table/tbody/tr[1]/td[3]/a
+        //*[@id="auctionGrid-2914"]/table/tbody/tr[1]/td[3]/a
+        //*[@id="folderListView"]/div[2]/label
             driver.close();
 
             //TODO find every row by xpath and extract links
 
 
-        }
+
 /*        for (WebElement lotik:lots
                 ) {
             otsL.add( lotik.getAttribute("href"));
@@ -93,7 +157,7 @@ public class KingCounty {
         gatherAuc(4,  lots);*/
         //driver.close();
         int debug = 1;
-        gatherDataPage(allLots.get(3), true);
+        //gatherDataPage(allLots.get(3), true);
         for (String link:
              allLots) {
             gatherDataPage(link, true);
@@ -135,20 +199,22 @@ public class KingCounty {
             Map<String, String> linksMap = base.getLinks(settings.getLinksMap());
             String url = driver.getCurrentUrl();
             permMap.put("url", url);
+            permMap.put("aPN", shortMap.get("aPN"));
             System.out.println(url);
             Map allPerm =  new HashMap<>(permMap);
             if(useAddl){
                 driver.navigate().to(linksMap.get("assessorInfo"));
                 base.sleep(2500);
-                Map<String, String> addlDataMap = base.getTextsBySiblingsText(settings.getAdditionalDataMap(), ".//td[2]");
-                if(base.isElementOnPage(By.xpath(settings.getPathToAddnlData2()))){
+                Map<String,String> aaa = settings.getAdditionalDataMap();
+                Map<String, String> addlDataMap = base.getTextsBySiblingsText(aaa, ".//td[2]");
+/*                if(base.isElementOnPage(By.xpath(settings.getPathToAddnlData2()))){
                     WebElement elt = driver.findElement(By.xpath(settings.getPathToAddnlData2()));
                     elt.click();
-                }
+                }*/
 
-                Map<String, String> addlDataMap2 = base.getTextsBySiblingsText(settings.getAdditionalDataMap2(), ".//td[2]");
+                //Map<String, String> addlDataMap2 = base.getTextsBySiblingsText(settings.getAdditionalDataMap2(), ".//td[2]");
                 allPerm.putAll(addlDataMap);
-                allPerm.putAll(addlDataMap2);
+               // allPerm.putAll(addlDataMap2);
                 allPerm.putAll(linksMap);
                 mydb.createNewTable("permanentData", allPerm);
                 if(!mydb.isPermanentDataExist(allPerm)){

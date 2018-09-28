@@ -228,7 +228,9 @@ public class Base {
 
     String getTextOfSibling(String xPath, String pathToSibling, String info){
         if (isElementOnPage(By.xpath(xPath))){
+            System.out.println("debug xp=" + xPath);
             WebElement el = driver.findElement(By.xpath(xPath));
+
             WebElement parent = el.findElement(By.xpath(".."));
             //divA.findElement(By.xpath(".//input"));
             if (isElementOnPage(parent.findElement(By.xpath(pathToSibling)))){
@@ -247,9 +249,20 @@ public class Base {
 
     String getTextOfSiblingsText(String text, String pathToSibling, String info){
         String xPath = "//*[contains(text(),'" + text + "')]";
+        System.out.println("debug getTextOfSiblingsText xp=" + xPath);
         return getTextOfSibling(xPath, pathToSibling, info);
     }
 
+    WebElement getElementByText(String text, String info){
+        String xPath = "//*[contains(text(),'" + text + "')]";
+        if (isElementOnPage(By.xpath(xPath))){
+            return driver.findElement(By.xpath(xPath));
+        }
+        else{
+            System.out.println("an element with text= " + text + " wasn't founded. getElementByText = " + info);
+            return null;
+        }
+    }
 
 
 
