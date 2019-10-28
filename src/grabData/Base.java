@@ -1,8 +1,5 @@
 package grabData;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -161,7 +158,8 @@ public class Base {
         return aucs;
     }
 
-    //ZAKONCHIL ZDES
+
+
     public List<WebElement> getListByClass(String weclass, String addmInf){
         sleep(minSleepTime*100);
         int initialSize = driver.findElements(By.className(weclass)).size();
@@ -222,8 +220,15 @@ public class Base {
 
     }
      void sleep(int time){
+        Random random = new Random();
+        int maxRnd;
+        maxRnd = Math.toIntExact(Math.round(time * 0.47));
+        long min = Math.round(time * 0.53);
+        int randomInteger = random.nextInt(maxRnd);
+        int newTime = Math.toIntExact(min + randomInteger);// System.out.println("input time =" + time + " result time =" + newTime); //debug
+
         try{
-            Thread.sleep(time);
+            Thread.sleep(newTime);
         }
         catch(InterruptedException ie){
         }

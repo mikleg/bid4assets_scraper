@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0c23a423-c52a-4776-acd9-264e67392963" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/grabData/Base.java" afterPath="$PROJECT_DIR$/src/grabData/Base.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/grabData/KingCounty.java" afterPath="$PROJECT_DIR$/src/grabData/KingCounty.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/grabData/Settings.java" afterPath="$PROJECT_DIR$/src/grabData/Settings.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,11 +28,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="KingCounty.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="KingCounty.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/grabData/KingCounty.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="48" column="15" lean-forward="false" selection-start-line="48" selection-start-column="15" selection-end-line="48" selection-end-column="15" />
+            <state relative-caret-position="255">
+              <caret line="51" column="16" lean-forward="false" selection-start-line="51" selection-start-column="16" selection-end-line="51" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -102,11 +102,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Base.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Base.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/grabData/Base.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="164" column="74" lean-forward="false" selection-start-line="164" selection-start-column="27" selection-end-line="164" selection-end-column="74" />
+            <state relative-caret-position="255">
+              <caret line="227" column="61" lean-forward="false" selection-start-line="227" selection-start-column="61" selection-end-line="227" selection-end-column="61" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -166,8 +166,8 @@
         <option value="$PROJECT_DIR$/src/grabData/Db.java" />
         <option value="$PROJECT_DIR$/src/grabData/Main.java" />
         <option value="$PROJECT_DIR$/src/grabData/Settings.java" />
-        <option value="$PROJECT_DIR$/src/grabData/Base.java" />
         <option value="$PROJECT_DIR$/src/grabData/KingCounty.java" />
+        <option value="$PROJECT_DIR$/src/grabData/Base.java" />
       </list>
     </option>
   </component>
@@ -328,7 +328,7 @@
       <workItem from="1539660931483" duration="27000" />
       <workItem from="1539661142798" duration="254000" />
       <workItem from="1542426574603" duration="2481000" />
-      <workItem from="1572229560543" duration="7317000" />
+      <workItem from="1572229560543" duration="8988000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1535688628292</created>
@@ -565,7 +565,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="225610000" />
+    <option name="totallyTimeSpent" value="227281000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -640,25 +640,25 @@
       <breakpoints>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/grabData/KingCounty.java</url>
-          <line>175</line>
+          <line>174</line>
           <properties />
           <option name="timeStamp" value="46" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/grabData/KingCounty.java</url>
-          <line>133</line>
+          <line>132</line>
           <properties />
           <option name="timeStamp" value="67" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/grabData/Base.java</url>
-          <line>245</line>
+          <line>250</line>
           <properties />
           <option name="timeStamp" value="74" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/grabData/KingCounty.java</url>
-          <line>222</line>
+          <line>221</line>
           <properties />
           <option name="timeStamp" value="76" />
         </line-breakpoint>
@@ -1161,20 +1161,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/grabData/Base.java">
+    <entry file="file://$PROJECT_DIR$/src/grabData/KingCounty.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="164" column="74" lean-forward="false" selection-start-line="164" selection-start-column="27" selection-end-line="164" selection-end-column="74" />
+        <state relative-caret-position="255">
+          <caret line="51" column="16" lean-forward="false" selection-start-line="51" selection-start-column="16" selection-end-line="51" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/grabData/KingCounty.java">
+    <entry file="file://$PROJECT_DIR$/src/grabData/Base.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="48" column="15" lean-forward="false" selection-start-line="48" selection-start-column="15" selection-end-line="48" selection-end-column="15" />
+        <state relative-caret-position="255">
+          <caret line="227" column="61" lean-forward="false" selection-start-line="227" selection-start-column="61" selection-end-line="227" selection-end-column="61" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

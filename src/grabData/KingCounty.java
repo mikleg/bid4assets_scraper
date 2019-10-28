@@ -43,13 +43,12 @@ public class KingCounty {
                 WebElement plus2 = driver.findElement(By.cssSelector("a[href='#collapseFive']")); //second level menu
                      if (plus2.getAttribute("aria-expanded") == "false") // click if not expanded
                     {
-                        base.elementClick(plus2, "auc click:");
-                    } //           System.out.println("debug "  + aucExpanded); //debug
+                        base.elementClick(plus2, "auc click:");//           System.out.println("debug "  + aucExpanded); //debug
+                    }
 
                 base.sleep(1100);
                 //List<WebElement> aucs = base.getListByXpath(settings.getPathToAucs(), " get aucs"); //ver 1
-                List<WebElement> aucs = base.getListByClass("ac-large", "no info");
-                System.out.println("debug" + aucs.get(0)); //debug
+                List<WebElement> aucs = base.getListByClass("ac-large", "no info"); System.out.println("debug" + aucs.get(0)); //debug
                 if (!aucs.get(0).isDisplayed()) {
                     base.elementClick(plus, "plus");
                     aucs = base.getListByXpath(settings.getPathToAucs(), " get aucs");
