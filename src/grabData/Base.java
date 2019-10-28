@@ -155,9 +155,23 @@ public class Base {
         }
         else {
             System.out.println(settings.getCrashMessage() + addnlInf);
+            sleep(minSleepTime*100);
             aucs = null;
         }
         return aucs;
+    }
+
+    //ZAKONCHIL ZDES
+    public List<WebElement> getListByClass(String weclass, String addmInf){
+        sleep(minSleepTime*100);
+        int initialSize = driver.findElements(By.className(weclass)).size();
+        List<WebElement> aucs;
+        if (isElementOnPage(By.className(weclass))){
+            aucs = driver.findElements(By.className(weclass));
+            return aucs;
+        }
+
+        return null;
     }
 
     public void elementClick(WebElement el, String addnlInf){

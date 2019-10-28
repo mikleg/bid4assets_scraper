@@ -10,6 +10,7 @@ public class Settings {
     private String ffDriverPath = "C:\\Users\\mikle\\lc101\\auc_java\\geckodriver.exe";
     private String mainUrl = "https://secure.bid4assets.com/mvc/storefront/KingCountyRES?col=2913";
     private String pathToPlus = "//*[@id=\"auction-folders-wp\"]/h4/a";
+
     //a[@href="'+url+'"]
     ////*[@id="auction-folders-wp"]/h4/a
     //*[@id="auction-folders-wp"]
@@ -26,6 +27,7 @@ public class Settings {
     private String partPath1 = "//*[@id=\"auctionGrid-";
     private String partPath2 = "/table/tbody/tr[";
     private Integer[] aucs ={2913,2914,2915,2916,2917};
+
 
 
     //Path to data
