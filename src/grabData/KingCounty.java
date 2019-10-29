@@ -37,15 +37,10 @@ public class KingCounty {
         driver = base.getNewDriver(driverBrowser);
         driver.get(settings.getMainUrl());
         for (int k=0; k < 5; k++) {
-
          //   if (base.isElementOnPage(By.id("auction-folders-wp"))) {
-               // base.sleep(18800);
-              //  plus = driver.findElement(By.id("auction-folders-wp")); // first level menu
-
-              //  base.elementClick(plus,"");
              //   base.sleep(18800);
                 WebElement plus2 = driver.findElement(By.cssSelector("a[href='#collapseFive']")); //second level menu
-                System.out.println("debug "  + plus2.getAttribute("aria-expanded")); //debug
+               // System.out.println("debug "  + plus2.getAttribute("aria-expanded")); //debug
                      if (plus2.getAttribute("aria-expanded").equals("false"))  // click if not expanded
                     {
                          base.elementClick(plus2, "auc click:");//           System.out.println("debug "  + aucExpanded); //debug
@@ -53,14 +48,9 @@ public class KingCounty {
 
                 base.sleep(1800);
                 //List<WebElement> aucs = base.getListByXpath(settings.getPathToAucs(), " get aucs"); //ver 1
-                List<WebElement> labels = base.getListByCSS(".bsnone.pl50", "no info"); System.out.println("debug labels" + labels.get(k)); //debug
-                List<WebElement> articles = base.getListByClass("ac-large", "no info"); System.out.println("debug articles" + articles.get(k)); //debug
-                System.out.println("debug attribute" + articles.get(0).getAttribute("style"));
-                System.out.println("debug attribute" + articles.get(1).getAttribute("style"));
-                System.out.println("debug attribute" + articles.get(2).getAttribute("style"));
-                System.out.println("debug attribute" + articles.get(3).getAttribute("style"));
-                System.out.println("debug attribute" + articles.get(4).getAttribute("style"));
-                if (articles.get(k+1).getAttribute("style") == "height: 0px;") // click if not expanded
+                List<WebElement> labels = base.getListByCSS(".bsnone.pl50", "no info"); //System.out.println("debug labels" + labels.get(k)); //debug
+                List<WebElement> articles = base.getListByClass("ac-large", "no info"); //System.out.println("debug articles" + articles.get(k)); //debug
+                if (!articles.get(k).getAttribute("style").equals("height: 740px;")) // click if not expanded
                     base.elementClick(labels.get(k), "auc click:");
 
   /*              if (!aucs.get(0).isDisplayed()) {
