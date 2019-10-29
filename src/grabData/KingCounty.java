@@ -26,38 +26,31 @@ public class KingCounty {
         driver = base.getNewDriver(driverBrowser);
         driver.get(settings.getMainUrl());
         List<WebElement> articles = new ArrayList();
-        for (int k=0; k < 5; k++) { //   if (base.isElementOnPage(By.id("auction-folders-wp"))) {
-                WebElement plus2 = driver.findElement(By.cssSelector("a[href='#collapseFive']")); //second level menu // System.out.println("debug "  + plus2.getAttribute("aria-expanded")); //debug
-                if (plus2.getAttribute("aria-expanded").equals("false"))  // click if not expanded
-                    {
-                         base.elementClick(plus2, "auc click:");//           System.out.println("debug "  + aucExpanded); //debug
-                    }
+         //   if (base.isElementOnPage(By.id("auction-folders-wp"))) {
+        //---- if (auctions folder) collapsed, click it
+        WebElement plus2 = driver.findElement(By.cssSelector("a[href='#collapseFive']")); //second level menu // System.out.println("debug "  + plus2.getAttribute("aria-expanded")); //debug
+            if (plus2.getAttribute("aria-expanded").equals("false"))  // click if not expanded
+                {
+                    base.elementClick(plus2, "auc click:");//           System.out.println("debug "  + aucExpanded); //debug
+                    base.sleep(1800);
+                }
+         //--- uncollapse all auction folders
+        for (int k=0; k < 5; k++) {
+            List<WebElement> labels = base.getListByCSS(".bsnone.pl50", "no info"); //System.out.println("debug labels" + labels.get(k)); //debug
+            articles = base.getListByClass("ac-large", "no info"); //System.out.println("debug articles" + articles.get(k)); //debug
+            if (!articles.get(k).getAttribute("style").equals("height: 740px;")) {// click if not expanded
+                base.elementClick(labels.get(k), "auc click:"); //if auction folder is closed -- open it
                 base.sleep(1800);
-                //List<WebElement> aucs = base.getListByXpath(settings.getPathToAucs(), " get aucs"); //ver 1
-                List<WebElement> labels = base.getListByCSS(".bsnone.pl50", "no info"); //System.out.println("debug labels" + labels.get(k)); //debug
-                articles = base.getListByClass("ac-large", "no info"); //System.out.println("debug articles" + articles.get(k)); //debug
-                if (!articles.get(k).getAttribute("style").equals("height: 740px;")) // click if not expanded
-                    base.elementClick(labels.get(k), "auc click:"); //if auction folder is closed -- open it
-                 // boolean aaa =  base.isElementOnPage(By.xpath( "//*[@for=\"ac-2913\"]"));
-           // }//auction wp
-           ///// List<WebElement> aucs = base.getListByXpath(settings.getPathToAucs(), " get aucs");
-            // int debug =1;
-            // List<WebElement> aucs = base.getListByXpath(settings.getPathToAucs(), " get aucs");
-            //   boolean aaaaaf = aucs.get(0).isDisplayed();
-           //*[@id="folderListView"]/div[1]/label
-            //base.sleep(1800);
-           ///// base.elementClick(aucs.get(k), "auc click:");
-            base.sleep(1800);
+            }
         }
          //------delete all ref with class k-link
         List<WebElement> refs = new ArrayList<>();
-
         List<WebElement> badRefs = articles.get(0).findElements(By.tagName("a"));
-        for (WebElement ref : refs) {
-           if (!badRefs.get(0).getAttribute("class").equals("k-link"))
+        for (WebElement ref : badRefs) {
+           if (!ref.getAttribute("class").equals("k-link"))
                refs.add(ref);
              }
-
+        int a = 1; //debug
         //  List<WebElement> aucs = base.getListByXpath(settings.getPathToAucs(), " get aucs");
           //  for(int s =0; s < aucs.size(); s++){
 
