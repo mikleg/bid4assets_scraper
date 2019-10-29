@@ -3,6 +3,7 @@ package grabData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -37,23 +38,37 @@ public class KingCounty {
         driver.get(settings.getMainUrl());
         for (int k=0; k < 5; k++) {
 
-            if (base.isElementOnPage(By.id("auction-folders-wp"))) {
-                plus = driver.findElement(By.id("auction-folders-wp")); // first level menu
-                base.sleep(1100);
+         //   if (base.isElementOnPage(By.id("auction-folders-wp"))) {
+               // base.sleep(18800);
+              //  plus = driver.findElement(By.id("auction-folders-wp")); // first level menu
+
+              //  base.elementClick(plus,"");
+             //   base.sleep(18800);
                 WebElement plus2 = driver.findElement(By.cssSelector("a[href='#collapseFive']")); //second level menu
-                     if (plus2.getAttribute("aria-expanded") == "false") // click if not expanded
+                System.out.println("debug "  + plus2.getAttribute("aria-expanded")); //debug
+                     if (plus2.getAttribute("aria-expanded").equals("false"))  // click if not expanded
                     {
-                        base.elementClick(plus2, "auc click:");//           System.out.println("debug "  + aucExpanded); //debug
+                         base.elementClick(plus2, "auc click:");//           System.out.println("debug "  + aucExpanded); //debug
                     }
 
-                base.sleep(1100);
+                base.sleep(1800);
                 //List<WebElement> aucs = base.getListByXpath(settings.getPathToAucs(), " get aucs"); //ver 1
-                List<WebElement> aucs = base.getListByClass("ac-large", "no info"); System.out.println("debug" + aucs.get(0)); //debug
-                if (!aucs.get(0).isDisplayed()) {
+                List<WebElement> labels = base.getListByCSS(".bsnone.pl50", "no info"); System.out.println("debug labels" + labels.get(k)); //debug
+                List<WebElement> articles = base.getListByClass("ac-large", "no info"); System.out.println("debug articles" + articles.get(k)); //debug
+                System.out.println("debug attribute" + articles.get(0).getAttribute("style"));
+                System.out.println("debug attribute" + articles.get(1).getAttribute("style"));
+                System.out.println("debug attribute" + articles.get(2).getAttribute("style"));
+                System.out.println("debug attribute" + articles.get(3).getAttribute("style"));
+                System.out.println("debug attribute" + articles.get(4).getAttribute("style"));
+                if (articles.get(k+1).getAttribute("style") == "height: 0px;") // click if not expanded
+                    base.elementClick(labels.get(k), "auc click:");
+
+  /*              if (!aucs.get(0).isDisplayed()) {
                     base.elementClick(plus, "plus");
                     aucs = base.getListByXpath(settings.getPathToAucs(), " get aucs");
                     boolean aaaaa = aucs.get(0).isDisplayed();
-                }
+                }*/
+
                 //TODo check that plus is not clicked
                 //       try {
                 //   List<WebElement> aucs_debug1 = base.getListByXpath(settings.getPathToAucs(), " get aucs");
@@ -61,9 +76,9 @@ public class KingCounty {
 
 
                 // boolean aaa =  base.isElementOnPage(By.xpath( "//*[@for=\"ac-2913\"]"));
-            }
+           // }//auction wp
 
-            List<WebElement> aucs = base.getListByXpath(settings.getPathToAucs(), " get aucs");
+           ///// List<WebElement> aucs = base.getListByXpath(settings.getPathToAucs(), " get aucs");
             // int debug =1;
             // List<WebElement> aucs = base.getListByXpath(settings.getPathToAucs(), " get aucs");
             //   boolean aaaaaf = aucs.get(0).isDisplayed();
@@ -73,7 +88,7 @@ public class KingCounty {
 
             //base.sleep(1800);
 
-            base.elementClick(aucs.get(k), "auc click:");
+           ///// base.elementClick(aucs.get(k), "auc click:");
             base.sleep(1800);
         }
 

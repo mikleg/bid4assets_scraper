@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.interactions.Actions;
 
 public class Base {
     private WebDriver driver;
@@ -160,9 +161,25 @@ public class Base {
 
 
 
+    public List<WebElement> getListByCSS(String weclass, String addmInf){
+        sleep(minSleepTime*100);
+       // int initialSize = driver.findElements(By.className(weclass)).size();
+        int initialSize = driver.findElements(By.cssSelector(weclass)).size(); System.out.println("findelCSS=" + initialSize ); //debug
+
+        List<WebElement> aucs;
+        if (isElementOnPage(By.cssSelector(weclass))){
+            aucs = driver.findElements(By.cssSelector(weclass));
+            return aucs;
+        }
+
+        return null;
+    }
+
     public List<WebElement> getListByClass(String weclass, String addmInf){
         sleep(minSleepTime*100);
-        int initialSize = driver.findElements(By.className(weclass)).size();
+        int initialSize = driver.findElements(By.className(weclass)).size(); System.out.println("findelclass=" + initialSize ); //debug
+        //int initialSize = driver.findElements(By.cssSelector(weclass)).size(); System.out.println("findel=" + initialSize ); //debug
+
         List<WebElement> aucs;
         if (isElementOnPage(By.className(weclass))){
             aucs = driver.findElements(By.className(weclass));
@@ -174,7 +191,15 @@ public class Base {
 
     public void elementClick(WebElement el, String addnlInf){
         if (isElementOnPage(el)){
-            el.click();
+            try{
+                el.click();
+            }
+            catch(WebDriverException ex){
+                Actions actions = new Actions(driver);
+                actions.moveToElement(el).click().perform();
+            }
+
+
         }
         else System.out.println(settings.getCrashMessage() + addnlInf);
     }
