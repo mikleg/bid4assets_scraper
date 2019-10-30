@@ -179,13 +179,11 @@ public class Base {
         sleep(minSleepTime*100);
         int initialSize = driver.findElements(By.className(weclass)).size(); System.out.println("findelclass=" + initialSize ); //debug
         //int initialSize = driver.findElements(By.cssSelector(weclass)).size(); System.out.println("findel=" + initialSize ); //debug
-
         List<WebElement> aucs;
         if (isElementOnPage(By.className(weclass))){
             aucs = driver.findElements(By.className(weclass));
             return aucs;
         }
-
         return null;
     }
 
@@ -256,6 +254,7 @@ public class Base {
             Thread.sleep(newTime);
         }
         catch(InterruptedException ie){
+            System.out.println("time exception");
         }
     }
 

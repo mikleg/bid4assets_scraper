@@ -3,6 +3,8 @@ package grabData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -26,8 +28,14 @@ public class KingCounty {
         driver = base.getNewDriver(driverBrowser);
         driver.get(settings.getMainUrl());
         List<WebElement> articles = new ArrayList();
+        List<WebElement> refs = new ArrayList<>();
+        base.sleep(1000);
          //   if (base.isElementOnPage(By.id("auction-folders-wp"))) {
         //---- if (auctions folder) collapsed, click it
+        WebElement cook = driver.findElement(By.cssSelector("a[aria-label='dismiss cookie message']"));
+        if (cook.isDisplayed()) {
+            cook.click();
+        }
         WebElement plus2 = driver.findElement(By.cssSelector("a[href='#collapseFive']")); //second level menu // System.out.println("debug "  + plus2.getAttribute("aria-expanded")); //debug
             if (plus2.getAttribute("aria-expanded").equals("false"))  // click if not expanded
                 {
@@ -37,19 +45,27 @@ public class KingCounty {
          //--- uncollapse all auction folders
         for (int k=0; k < 5; k++) {
             List<WebElement> labels = base.getListByCSS(".bsnone.pl50", "no info"); //System.out.println("debug labels" + labels.get(k)); //debug
+            base.sleep(1800);
             articles = base.getListByClass("ac-large", "no info"); //System.out.println("debug articles" + articles.get(k)); //debug
+            base.sleep(1800);
             if (!articles.get(k).getAttribute("style").equals("height: 740px;")) {// click if not expanded
+                Actions actions = new Actions(driver);
+                actions.moveToElement(labels.get(k),0,-1).perform();
+                base.sleep(1800);
                 base.elementClick(labels.get(k), "auc click:"); //if auction folder is closed -- open it
                 base.sleep(1800);
             }
-        }
+            List<WebElement> badRefs = new ArrayList<>();
+            WebElement el = articles.get(k);
+            badRefs = el.findElements(By.tagName("a"));
+
+            for (WebElement ref : badRefs) {
+                if (!ref.getAttribute("class").equals("k-link"))
+                    refs.add(ref);
+            }
+         }
          //------delete all ref with class k-link
-        List<WebElement> refs = new ArrayList<>();
-        List<WebElement> badRefs = articles.get(0).findElements(By.tagName("a"));
-        for (WebElement ref : badRefs) {
-           if (!ref.getAttribute("class").equals("k-link"))
-               refs.add(ref);
-             }
+
         int a = 1; //debug
         //  List<WebElement> aucs = base.getListByXpath(settings.getPathToAucs(), " get aucs");
           //  for(int s =0; s < aucs.size(); s++){
