@@ -242,7 +242,17 @@ public class Base {
         }
 
     }
-     void sleep(int time){
+    void coockeClick (WebDriver driver) {
+        WebElement cook = driver.findElement(By.cssSelector("a[aria-label='dismiss cookie message']"));
+        if (cook.isDisplayed()) {
+            cook.click();
+            sleep(1000);
+        }
+    }
+
+
+
+    void sleep(int time){
         Random random = new Random();
         int maxRnd;
         maxRnd = Math.toIntExact(Math.round(time * 0.47));

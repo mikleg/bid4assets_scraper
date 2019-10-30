@@ -31,11 +31,14 @@ public class KingCounty {
         List<WebElement> refs = new ArrayList<>();
         base.sleep(1000);
          //   if (base.isElementOnPage(By.id("auction-folders-wp"))) {
-        //---- if (auctions folder) collapsed, click it
-        WebElement cook = driver.findElement(By.cssSelector("a[aria-label='dismiss cookie message']"));
+
+        base.coockeClick(driver); //ckick on cook
+/*        WebElement cook = driver.findElement(By.cssSelector("a[aria-label='dismiss cookie message']"));
         if (cook.isDisplayed()) {
             cook.click();
-        }
+            base.sleep(1000);
+        }*/
+        //---- if (auctions folder) collapsed, click it
         WebElement plus2 = driver.findElement(By.cssSelector("a[href='#collapseFive']")); //second level menu // System.out.println("debug "  + plus2.getAttribute("aria-expanded")); //debug
             if (plus2.getAttribute("aria-expanded").equals("false"))  // click if not expanded
                 {
@@ -46,13 +49,13 @@ public class KingCounty {
         articles = base.getListByClass("ac-large", "no info");
         for (int k=0; k < articles.size(); k++) {
             List<WebElement> labels = base.getListByCSS(".bsnone.pl50", "no info"); //System.out.println("debug labels" + labels.get(k)); //debug
-            base.sleep(1800);
+           // base.sleep(1800);
             articles = base.getListByClass("ac-large", "no info"); //System.out.println("debug articles" + articles.get(k)); //debug
-            base.sleep(1800);
+           // base.sleep(1800);
             if (!articles.get(k).getAttribute("style").equals("height: 740px;")) {// click if not expanded
                 Actions actions = new Actions(driver);
                 actions.moveToElement(labels.get(k),0,-1).perform();
-                base.sleep(1800);
+                base.sleep(800);
                 base.elementClick(labels.get(k), "auc click:"); //if auction folder is closed -- open it
                 base.sleep(1800);
             }
@@ -61,70 +64,16 @@ public class KingCounty {
             badRefs = el.findElements(By.tagName("a"));
             //------delete all ref with class k-link
             for (WebElement ref : badRefs) {
-                if (!ref.getAttribute("class").equals("k-link"))
+                if (!ref.getAttribute("class").equals("k-link")){
                     refs.add(ref);
+                allLots.add(ref.getAttribute("href"));
+                 }
             }
          }
 
-             int debug4=1;
-             for (int l=0; l < 5; l++){
-                 for (int j=1; j < 11; j ++){
-                     if (base.isElementOnPage(By.xpath(settings.getPathToLot(j, l)))){
-                         lot = driver.findElement(By.xpath(settings.getPathToLot(j, l)));
-                         allLots.add(lot.getAttribute("href"));
-                     }
-                 }
-             }
-
-/*             for (int j=0; j < 10; j ++)
-               // gatherAuc(j,  lots);
-            {
-                if(base.isElementOnPage(lots.get(j))){
-                  //  Integer k = j % 10;
-                  //  lot = base.getElement(lots.get(j),"//*[" + (k+1) + "]" + settings.getPathToLot(), "get lot");
-                //    Integer number = (k + 1);
-                  //  String pathTol = "//*[@id=\"auctionGrid-2915\"]"
-                  //          + "/table/tbody/tr[" + number.toString() + "]" + settings.getPathToLot();
-                    System.out.println("pathTol=" + settings.getPathToLot());
-                    lot = driver.findElement(By.xpath(pathTol));
-                    allLots.add(lot.getAttribute("href"));
-                }
-
-            }*/
-        //*[@id="folderListView"]/div[1]/label
-//*[@id="auctionGrid-2913"]/table/tbody/tr[1]/td[3]/a
-        //*[@id="auctionGrid-2914"]/table/tbody/tr[1]/td[3]/a
-        //*[@id="folderListView"]/div[2]/label
-            driver.close();
-
-            //TODO find every row by xpath and extract links
-
-
-
-/*        for (WebElement lotik:lots
-                ) {
-            otsL.add( lotik.getAttribute("href"));
-        }*/
-/*        lots = base.getElements(aucs.get(0), settings.getPathToLots(), " get lots");
-        for (int j=1; j < lots.size(); j ++)
-            gatherAuc(j,  lots);*/
-
-/*        for (int k=0; k < aucs.size(); k++){
-            base.elementClick(aucs.get(k), "auc click:" );
-            lots = base.getElements(aucs.get(k), settings.getPathToLots(), " get lots");
-            System.out.println("debug:" + lots.size());
-                for (int j=1; j < lots.size(); j ++)
-            gatherAuc(j,  lots);
-        }*/
-
-
-   /*     base.elementClick(aucs.get(3), "auc click:" );
-        lots = base.getElements(aucs.get(3), settings.getPathToLots(), " get lots");
-        System.out.println("debug:" + lots.size());
-        gatherAuc(4,  lots);*/
-        //driver.close();
-        int debug = 1;
-        //gatherDataPage(allLots.get(3), true);
+        int debug4=1;
+        driver.close();
+       //gatherDataPage(allLots.get(3), true);
         for (String link:
              allLots) {
             gatherDataPage(link, true);
@@ -132,27 +81,12 @@ public class KingCounty {
         }
     }
 
-/*
-    private void gatherAuc(int num, List<WebElement> lots){
-        if(base.isElementOnPage(lots.get(num))){
-
-            lot = base.getElement(lots.get(num),"//*[" + num + "]" + settings.getPathToLot(), "get lot");
-            base.elementClick(lot, "click lot");
-            gatherDataPage();
-
-            //driver.navigate().back();
-
-        }
-    }
-*/
-
-
-        //private getAucInfo()
     private void gatherDataPage(String aucUrl, boolean useAddl){
         //TO DO replace on wait
         driver = base.getNewDriver(driverBrowser);
         driver.get(aucUrl);
         base.sleep(800);
+        base.coockeClick(driver); //ckick on cook
         if(!base.isElementOnPage(By.xpath(settings.getPathToLastElement()))){
             base.sleep(3500);
            }
