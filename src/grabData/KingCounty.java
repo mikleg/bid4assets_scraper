@@ -42,8 +42,9 @@ public class KingCounty {
                     base.elementClick(plus2, "auc click:");//           System.out.println("debug "  + aucExpanded); //debug
                     base.sleep(1800);
                 }
-         //--- uncollapse all auction folders
-        for (int k=0; k < 5; k++) {
+         //--- open all auction folders
+        articles = base.getListByClass("ac-large", "no info");
+        for (int k=0; k < articles.size(); k++) {
             List<WebElement> labels = base.getListByCSS(".bsnone.pl50", "no info"); //System.out.println("debug labels" + labels.get(k)); //debug
             base.sleep(1800);
             articles = base.getListByClass("ac-large", "no info"); //System.out.println("debug articles" + articles.get(k)); //debug
@@ -58,37 +59,13 @@ public class KingCounty {
             List<WebElement> badRefs = new ArrayList<>();
             WebElement el = articles.get(k);
             badRefs = el.findElements(By.tagName("a"));
-
+            //------delete all ref with class k-link
             for (WebElement ref : badRefs) {
                 if (!ref.getAttribute("class").equals("k-link"))
                     refs.add(ref);
             }
          }
-         //------delete all ref with class k-link
 
-        int a = 1; //debug
-        //  List<WebElement> aucs = base.getListByXpath(settings.getPathToAucs(), " get aucs");
-          //  for(int s =0; s < aucs.size(); s++){
-
-          //  }
-
-
-            //lots = base.getElements(aucs.get(4), settings.getPathToLots(), " get lots");
-           //  WebElement lotik = driver.findElement(By.xpath("//*[@for=\"ac-2914\"]"));
-             //WebElement lotik = base.getListByXpath(   base."//*[@for=\"ac-2913\"]", "bkaka");
-           //  lots =  base.getElements(lotik,  settings.getPathToLots(), " get lots");
-         /*   WebElement debug1 =  base.getElement(lots.get(0),"//*[" + 1 + "]" + settings.getPathToLot(), "get lot");
-            WebElement debug2 =  base.getElement(lots.get(18),"//*[" + 19 + "]" + settings.getPathToLot(), "get lot");
-            String t1 = debug1.getAttribute("href");
-            String t2 = debug2.getAttribute("href");
-            ////*[@id="auctionGrid-2915"]
-             //row //*[@id="auctionGrid-2915"]/table/tbody/tr[1]
-             //*[@id="auctionGrid-2915"]/table/tbody/tr[1]
-
-
-
-
-*/
              int debug4=1;
              for (int l=0; l < 5; l++){
                  for (int j=1; j < 11; j ++){
