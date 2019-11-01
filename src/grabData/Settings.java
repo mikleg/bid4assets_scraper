@@ -196,7 +196,12 @@ public class Settings {
         return  AdditionalDataMap;
 
     }
-
+    public Map<String,String> getAdditionalDataMapPierce(){
+        AdditionalDataMap = new HashMap<String, String>();
+        //"//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[6]/td[2]/li[2]/a");
+        AdditionalDataMap.put("lotSize", "Land SqFt");
+        return  AdditionalDataMap;
+    }
     public Map<String,String> getAdditionalDataMap2(){
         if(AdditionalDataMap2 == null || AdditionalDataMap2.isEmpty()){
             AdditionalDataMap2 = new HashMap<String, String>();

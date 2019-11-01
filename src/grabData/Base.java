@@ -202,6 +202,17 @@ public class Base {
         else System.out.println(settings.getCrashMessage() + addnlInf);
     }
 
+    public WebElement getElementByXpath(WebDriver driver, String path, String addnlInf){
+        if (isElementOnPage(driver.findElement(By.xpath(path)))){
+            return driver.findElement(By.xpath(path));
+        }
+        else{
+            System.out.println(settings.getCrashMessage() + addnlInf + "with xpath: " + path);
+            return null;
+        }
+
+    }
+
     public WebElement getElement(WebElement el, String path, String addnlInf){
         if (isElementOnPage(el)&&isElementOnPage(el.findElement(By.xpath(path)))){
             return el.findElement(By.xpath(path));
@@ -226,7 +237,7 @@ public class Base {
                  if (size == el.findElements(By.xpath(path)).size())
                  {sleep(minSleepTime*100); System.out.println("debug sz100 =" + size);}
                  if (size == el.findElements(By.xpath(path)).size() && size == initialSize)
-                 {sleep(minSleepTime*1000); System.out.println("debug sz1000 =" + size);}
+                 {sleep(minSleepTime*600); System.out.println("debug sz1000 =" + size);}
 
                 // System.out.println("debug sz =" + size);
              } while(el.findElements(By.xpath(path)).size() > size);

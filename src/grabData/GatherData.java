@@ -106,6 +106,10 @@ public class GatherData {
             if(useAddl){
                 driver.navigate().to(linksMap.get("assessorInfo"));
                 base.sleep(2500);
+                //click on parcel number in the parcel data
+                WebElement cudaClick = base.getElementByXpath(driver,"//*[@id=\"customContent\"]/table/tbody/tr[1]/td/table[3]/tbody/tr/td/table/tbody/tr[2]/td[1]/a", "get parcel pierce");
+                base.elementClick(cudaClick, "click on parcel number in the parcel data");
+                ////*[@id="customContent"]/table/tbody/tr[1]/td/table[3]/tbody/tr/td/table/tbody/tr[2]/td[1]/a
                 Map<String,String> aaa = settings.getAdditionalDataMap();
                 Map<String, String> addlDataMap = base.getTextsBySiblingsText(aaa, ".//td[2]");
 /*                if(base.isElementOnPage(By.xpath(settings.getPathToAddnlData2()))){
