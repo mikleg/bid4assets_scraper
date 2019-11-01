@@ -42,6 +42,7 @@ public class Settings {
     private Map<String,String> var2Map;
 
 
+
     public Map<String,String> getPermanentMap(){
         if(PermanentDataMap == null || PermanentDataMap.isEmpty()){
             PermanentDataMap = new HashMap<String, String>();
@@ -54,6 +55,7 @@ public class Settings {
             PermanentDataMap.put("location", "//*[@id=\"auction-detail-left\"]/div[2]/table/tbody/tr[3]/td[2]");
            // PermanentDataMap.put("aPN", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[2]/td[2]");
             PermanentDataMap.put("aPN", "//*[@id=\"auction-content\"]/div[5]/div[4]/table/tbody/tr[4]/td[2]/a");
+            ////*[@id="auction-content"]/div[5]/div[4]/table[1]/tbody/tr[2]/td[2]
             //*[@id="auction-content"]/div[5]/div[4]/table/tbody/tr[3]/td[2]
             PermanentDataMap.put("legalDescription", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[3]/td[2]");
           //  PermanentDataMap.put("gIS", "");
@@ -62,10 +64,17 @@ public class Settings {
             PermanentDataMap.put("assessedValuesDate", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[2]/tbody/tr[2]/td[2]");
             PermanentDataMap.put("improvementsValue", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[2]/tbody/tr[3]/td[2]");
             PermanentDataMap.put("LandValue", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[2]/tbody/tr[5]/td[2]");
-            PermanentDataMap.put("aPN", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[2]/td[2]");
+           // PermanentDataMap.put("aPN", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[2]/td[2]");
         }
         return  PermanentDataMap;
 
+    }
+
+    public Map<String,String> getPermanentMapPierce(){
+        Map<String,String> res = getPermanentMap();
+        res.put("aPN", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[2]/td[2]");
+        ////*[@id="auction-content"]/div[5]/div[4]/table[1]/tbody/tr[2]/td[2]
+        return res;
     }
 
     public Map<String,String> getShortMap(){
@@ -77,6 +86,12 @@ public class Settings {
         }
         return  shortMap;
 
+    }
+    public Map<String,String> getShortMapPierce(){
+        Map<String,String> res = getShortMap();
+        res.put("aPN", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[2]/td[2]");
+        //*[@id="auction-content"]/div[5]/div[4]/table[1]/tbody/tr[2]/td[2]
+        return res;
     }
 
     public Map<String,String> getVar2Map(){
@@ -113,25 +128,7 @@ public class Settings {
 
     }
 
-    public Map<String,String> getVariableMapPierce(){
-        if(VariableDataMap == null || VariableDataMap.isEmpty()){
-            VariableDataMap = new HashMap<String, String>();
-            VariableDataMap.put("b4aNumber", "//*[@id=\"auction-content\"]/h1");
-            VariableDataMap.put("currentBid", "//*[@id=\"current-bid-span\"]");
-            VariableDataMap.put("status", "//*[@id=\"auction-right-panel\"]/div[3]/table/tbody/tr[6]/td");
-            VariableDataMap.put("numberOfBids", "//*[@id=\"num-bids-block\"]");
-            VariableDataMap.put("closesIn", "//*[@id=\"time-remaining-block\"]");
-            VariableDataMap.put("pageViews", "//*[@id=\"auction-detail-page-views\"]");
-            VariableDataMap.put("auctionType", "//*[@id=\"auction-right-panel\"]/div[2]/table/tbody/tr[2]/td");
-            VariableDataMap.put("WinningBid", "//*[@id=\"auction-right-panel\"]/div[3]/table/tbody/tr[2]/td");
-            VariableDataMap.put("Winner", "//*[@id=\"auction-right-panel\"]/div[3]/table/tbody/tr[3]/td");
-            VariableDataMap.put("AuctionStarted", "//*[@id=\"auction-right-panel\"]/div[3]/table/tbody/tr[8]/td");
-            VariableDataMap.put("AuctionClosed", "//*[@id=\"actual-close-time-block\"]/span");
-            //VariableDataMap.put("timestamp", "");
-        }
-        return  VariableDataMap;
 
-    }
 
     public Map<String,String> getLinksMap(){
         if(LinksDataMap == null || LinksDataMap.isEmpty()){

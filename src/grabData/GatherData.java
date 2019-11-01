@@ -90,13 +90,13 @@ public class GatherData {
       //  if(!base.isElementOnPage(By.xpath(settings.getPathToLastElement()))){
         //    base.sleep(3500);
           // }
-        Map<String, String> varMap = base.getTexts(settings.getVariableMapPierce());
+        Map<String, String> varMap = base.getTexts(settings.getVariableMap());
        //
       //  Map<String, String> varMap2 = base.getTextsBySiblingsText(settings.getVar2Map(), ".//td");
      //   varMap.putAll(varMap2);
-        Map<String, String> shortMap = base.getTexts(settings.getShortMap());
+        Map<String, String> shortMap = base.getTexts(settings.getShortMapPierce());
      //   if (varMap.get("auctionType").equals("None")){
-            Map<String, String> permMap = base.getTexts(settings.getPermanentMap());
+            Map<String, String> permMap = base.getTexts(settings.getPermanentMapPierce());
             Map<String, String> linksMap = base.getLinks(settings.getLinksMapPierce());
             String url = driver.getCurrentUrl();
             permMap.put("url", url);
