@@ -9,7 +9,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class KingCounty {
+public class GatherData {
     Base base;
     String driverBrowser = "chrome";
     WebDriver driver;
@@ -52,9 +52,9 @@ public class KingCounty {
            // base.sleep(1800);
             articles = base.getListByClass("ac-large", "no info"); //System.out.println("debug articles" + articles.get(k)); //debug
            // base.sleep(1800);
-            if (!articles.get(k).getAttribute("style").equals("height: 740px;")) {// click if not expanded
+            if (articles.get(k).getAttribute("style").equals("height: 0px;")|| articles.get(k).getAttribute("style").equals("")) {// click if not expanded
                 Actions actions = new Actions(driver);
-                actions.moveToElement(labels.get(k),0,-1).perform();
+                actions.moveToElement(labels.get(k),0,-15).perform();
                 base.sleep(800);
                 base.elementClick(labels.get(k), "auc click:"); //if auction folder is closed -- open it
                 base.sleep(1800);
@@ -73,7 +73,7 @@ public class KingCounty {
 
         int debug4=1;
         driver.close();
-       //gatherDataPage(allLots.get(3), true);
+     //  gatherDataPage(allLots.get(1), true);
         for (String link:
              allLots) {
             gatherDataPage(link, true);
@@ -87,17 +87,17 @@ public class KingCounty {
         driver.get(aucUrl);
         base.sleep(800);
         base.coockeClick(driver); //ckick on cook
-        if(!base.isElementOnPage(By.xpath(settings.getPathToLastElement()))){
-            base.sleep(3500);
-           }
-        Map<String, String> varMap = base.getTexts(settings.getVariableMap());
+      //  if(!base.isElementOnPage(By.xpath(settings.getPathToLastElement()))){
+        //    base.sleep(3500);
+          // }
+        Map<String, String> varMap = base.getTexts(settings.getVariableMapPierce());
        //
       //  Map<String, String> varMap2 = base.getTextsBySiblingsText(settings.getVar2Map(), ".//td");
      //   varMap.putAll(varMap2);
         Map<String, String> shortMap = base.getTexts(settings.getShortMap());
      //   if (varMap.get("auctionType").equals("None")){
             Map<String, String> permMap = base.getTexts(settings.getPermanentMap());
-            Map<String, String> linksMap = base.getLinks(settings.getLinksMap());
+            Map<String, String> linksMap = base.getLinks(settings.getLinksMapPierce());
             String url = driver.getCurrentUrl();
             permMap.put("url", url);
             permMap.put("aPN", shortMap.get("aPN"));
@@ -114,7 +114,7 @@ public class KingCounty {
                 }*/
 
                 //Map<String, String> addlDataMap2 = base.getTextsBySiblingsText(settings.getAdditionalDataMap2(), ".//td[2]");
-                allPerm.putAll(addlDataMap);
+              // allPerm.putAll(addlDataMap);debug
                // allPerm.putAll(addlDataMap2);
                 allPerm.putAll(linksMap);
                 mydb.createNewTable("permanentData", allPerm);

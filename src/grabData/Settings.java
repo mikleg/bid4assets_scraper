@@ -8,7 +8,8 @@ public class Settings {
     private String crashMessage = "Crash in:";
     private String exePath = "C:\\Users\\mikle\\lc101\\auc_java\\chromedriver.exe";;
     private String ffDriverPath = "C:\\Users\\mikle\\lc101\\auc_java\\geckodriver.exe";
-    private String mainUrl = "https://secure.bid4assets.com/mvc/storefront/KingCountyRES?col=2913";
+   // private String mainUrl = "https://secure.bid4assets.com/mvc/storefront/KingCountyRES?col=2913";
+    private String mainUrl = "https://www.bid4assets.com/mvc/storefront/PierceATNov19?col=3677";
     private String pathToPlus = "//*[@id=\"auction-folders-wp\"]/h4/a";
 
     //a[@href="'+url+'"]
@@ -112,6 +113,26 @@ public class Settings {
 
     }
 
+    public Map<String,String> getVariableMapPierce(){
+        if(VariableDataMap == null || VariableDataMap.isEmpty()){
+            VariableDataMap = new HashMap<String, String>();
+            VariableDataMap.put("b4aNumber", "//*[@id=\"auction-content\"]/h1");
+            VariableDataMap.put("currentBid", "//*[@id=\"current-bid-span\"]");
+            VariableDataMap.put("status", "//*[@id=\"auction-right-panel\"]/div[3]/table/tbody/tr[6]/td");
+            VariableDataMap.put("numberOfBids", "//*[@id=\"num-bids-block\"]");
+            VariableDataMap.put("closesIn", "//*[@id=\"time-remaining-block\"]");
+            VariableDataMap.put("pageViews", "//*[@id=\"auction-detail-page-views\"]");
+            VariableDataMap.put("auctionType", "//*[@id=\"auction-right-panel\"]/div[2]/table/tbody/tr[2]/td");
+            VariableDataMap.put("WinningBid", "//*[@id=\"auction-right-panel\"]/div[3]/table/tbody/tr[2]/td");
+            VariableDataMap.put("Winner", "//*[@id=\"auction-right-panel\"]/div[3]/table/tbody/tr[3]/td");
+            VariableDataMap.put("AuctionStarted", "//*[@id=\"auction-right-panel\"]/div[3]/table/tbody/tr[8]/td");
+            VariableDataMap.put("AuctionClosed", "//*[@id=\"actual-close-time-block\"]/span");
+            //VariableDataMap.put("timestamp", "");
+        }
+        return  VariableDataMap;
+
+    }
+
     public Map<String,String> getLinksMap(){
         if(LinksDataMap == null || LinksDataMap.isEmpty()){
             LinksDataMap = new HashMap<String, String>();
@@ -120,6 +141,19 @@ public class Settings {
            // LinksDataMap.put("assessorInfo", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[6]/td[2]/li[1]/a");
             LinksDataMap.put("assessorInfo", "//*[@id=\"auction-content\"]/div[5]/div[4]/table/tbody/tr[4]/td[2]/a");
             //LinksDataMap.put("titleReport", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[6]/td[2]/li[2]/a");
+        }
+        return  LinksDataMap;
+
+    }
+
+    public Map<String,String> getLinksMapPierce(){
+        if(LinksDataMap == null || LinksDataMap.isEmpty()){
+            LinksDataMap = new HashMap<String, String>();
+            LinksDataMap.put("gIS", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[5]/td[2]/a");
+            //*[@id="auction-content"]/div[5]/div[4]/table/tbody/tr[4]/td[2]/a
+            // LinksDataMap.put("assessorInfo", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[6]/td[2]/li[1]/a");
+            LinksDataMap.put("assessorInfo", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[6]/td[2]/li[1]/a");
+            LinksDataMap.put("titleReport", "//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[6]/td[2]/li[2]/a");
         }
         return  LinksDataMap;
 

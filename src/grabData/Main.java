@@ -3,14 +3,9 @@ package grabData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
-import grabData.Settings;
 
 public class Main {
     private static int sTimeout  = 5; //timeout in sec for wait
@@ -61,9 +56,9 @@ public class Main {
         WebElement someAuc = someRow.findElement(By.xpath(".//td[3]/a"));
 
         someAuc.click();*/
-        KingCounty kingCounty = new KingCounty();
+        GatherData gatherData = new GatherData();
         for (int i =0; i < 900; i++)
-        kingCounty.runScraper();
+        gatherData.runScraper();
 
         int debug = 0;
 
