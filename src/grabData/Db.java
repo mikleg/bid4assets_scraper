@@ -27,8 +27,12 @@ public class Db implements DbInterface {
 
 
     public boolean isTableExist(String table){
-        return false;
-    }
+       // String qres6;
+        String sql = "SELECT name FROM sqlite_master WHERE type='table' AND name='" + table+ "{table_name}';";
+        String qres = getQueryResultToString(sql);
+        return qres.length() > 0;
+
+        }
 /*    public boolean isPermanentDataExist(Map<String, String> map){
         //TODO replace parcelNumber
         String aucnumb = map.get("parcelNumber");

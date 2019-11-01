@@ -71,7 +71,7 @@ public class GatherData {
             }
          }
 
-        int debug4=1;
+//        int debug4=1;
         driver.close();
      //  gatherDataPage(allLots.get(1), true);
         for (String link:
