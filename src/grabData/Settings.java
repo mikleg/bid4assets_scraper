@@ -170,23 +170,23 @@ public class Settings {
         if(AdditionalDataMap == null || AdditionalDataMap.isEmpty()){
             AdditionalDataMap = new HashMap<String, String>();
             AdditionalDataMap.put("lotSize", "Land SqFt");
-            //AdditionalDataMap.put("views", "Views");
+            AdditionalDataMap.put("views", "Views");
             AdditionalDataMap.put("unbuildable", "Unbuildable");
-            //AdditionalDataMap.put("numberOfBedrooms", "Number Of Bedrooms");
-           // AdditionalDataMap.put("numberOfBaths", "Number Of Baths");
-            //AdditionalDataMap.put("grade", "Grade");
+            AdditionalDataMap.put("numberOfBedrooms", "Number Of Bedrooms");
+            AdditionalDataMap.put("numberOfBaths", "Number Of Baths");
+            AdditionalDataMap.put("grade", "Grade");
             AdditionalDataMap.put("jurisdiction", "Jurisdiction");
-            //AdditionalDataMap.put("waterfront", "Waterfront");
-            //AdditionalDataMap.put("waterfront", "Waterfront");
-            //AdditionalDataMap.put("Parcel", "Parcel");
-            //AdditionalDataMap.put("constructionClass", "Construction Class");
+            AdditionalDataMap.put("waterfront", "Waterfront");
+            AdditionalDataMap.put("waterfront", "Waterfront");
+            AdditionalDataMap.put("Parcel", "Parcel");
+            AdditionalDataMap.put("constructionClass", "Construction Class");
             AdditionalDataMap.put("presentUse", "Present Use");
             AdditionalDataMap.put("zoning", "Zoning");
             AdditionalDataMap.put("water", "Water");
-           // AdditionalDataMap.put("sewerSeptic", "Sewer/Septic");
+            AdditionalDataMap.put("sewerSeptic", "Sewer/Septic");
             AdditionalDataMap.put("RestrictiveSizeShape", "Restrictive Size Shape");
-           // AdditionalDataMap.put("Zoning", "Zoning");
-            //AdditionalDataMap.put("Water", "Water");
+            AdditionalDataMap.put("Zoning", "Zoning");
+            AdditionalDataMap.put("Water", "Water");
             AdditionalDataMap.put("SewerSeptic", "Sewer/Septic");
             AdditionalDataMap.put("RoadAccess", "Road Access");
             AdditionalDataMap.put("Parking", "Parking");
@@ -196,10 +196,14 @@ public class Settings {
         return  AdditionalDataMap;
 
     }
+
+
+
     public Map<String,String> getAdditionalDataMapPierce(){
         AdditionalDataMap = new HashMap<String, String>();
-        //"//*[@id=\"auction-content\"]/div[5]/div[4]/table[1]/tbody/tr[6]/td[2]/li[2]/a");
-        AdditionalDataMap.put("lotSize", "Land SqFt");
+        AdditionalDataMap.put("SiteAddress", "Site Address:");
+        AdditionalDataMap.put("TaxableValue", "Taxable Value:");
+
         return  AdditionalDataMap;
     }
     public Map<String,String> getAdditionalDataMap2(){

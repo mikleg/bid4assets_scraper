@@ -110,7 +110,18 @@ public class GatherData {
                 WebElement cudaClick = base.getElementByXpath(driver,"//*[@id=\"customContent\"]/table/tbody/tr[1]/td/table[3]/tbody/tr/td/table/tbody/tr[2]/td[1]/a", "get parcel pierce");
                 base.elementClick(cudaClick, "click on parcel number in the parcel data");
                 ////*[@id="customContent"]/table/tbody/tr[1]/td/table[3]/tbody/tr/td/table/tbody/tr[2]/td[1]/a
-                Map<String,String> aaa = settings.getAdditionalDataMap();
+                //   //*[@id="customContent"]/table/tbody/tr[1]/td/table[2]/tbody/tr/td[1]/table/tbody/tr[2]/td[2]
+                //   //*[@id="customContent"]/table/tbody/tr[1]/td/table[2]/tbody/tr/td[1]/table/tbody/tr[5]/td[2]
+                // //*[@id="customContent"]/table/tbody/tr[1]/td/table[3]/tbody/tr/td[1]/table/tbody/tr[2]/td[2]
+                // //*[@id="customContent"]/table/tbody/tr[1]/td/table[2]/tbody/tr/td[1]/table/tbody/tr[3]
+                // //*[@id="customContent"]/table/tbody/tr[1]/td/table[2]/tbody/tr/td[1]/table/tbody/tr[3]/td[2]
+                 //debug
+                WebElement test =  base.getElementByText("Site Address:", "debug test element");
+                System.out.println(base.getTextOfSibling(test, ".//td[2]", " debug test 2" ));
+                //getTextOfSibling(String xPath, String pathToSibling, String info)
+
+
+                Map<String,String> aaa = settings.getAdditionalDataMapPierce();
                 Map<String, String> addlDataMap = base.getTextsBySiblingsText(aaa, ".//td[2]");
 /*                if(base.isElementOnPage(By.xpath(settings.getPathToAddnlData2()))){
                     WebElement elt = driver.findElement(By.xpath(settings.getPathToAddnlData2()));

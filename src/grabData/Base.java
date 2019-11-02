@@ -296,6 +296,7 @@ public class Base {
             WebElement el = driver.findElement(By.xpath(xPath));
 
             WebElement parent = el.findElement(By.xpath(".."));
+
             //divA.findElement(By.xpath(".//input"));
             if (isElementOnPage(parent.findElement(By.xpath(pathToSibling)))){
                 WebElement child =  parent.findElement(By.xpath(pathToSibling));
@@ -310,6 +311,30 @@ public class Base {
         }
         return "None";
     }
+
+    String getTextOfSibling(WebElement el, String pathToSibling, String info){
+        if (isElementOnPage(el)){
+            System.out.println("debug sibking1=" + el.toString());
+            WebElement parent = el.findElement(By.xpath("..")); //up level
+            WebElement parent2 = parent.findElement(By.xpath(".."));
+            WebElement parent3 = parent2.findElement(By.xpath(".."));
+            System.out.println("debug parent=" + parent3.toString() + " ag name=" + parent3.getTagName() + " text=" + parent3.getText());
+            if (isElementOnPage(parent3.findElement(By.xpath(pathToSibling)))){
+                WebElement child =  parent3.findElement(By.xpath(pathToSibling));
+                String txt = child.getText();
+                System.out.println("debug sibking2=" + child.toString() + " tag name=" + child.getTagName() + " text=" + txt);
+                return txt;
+            }
+            else
+            {System.out.println("an child element with sibling= " + el.toString() + "   ____ " + "pathToSibling wasn't founded. getTextOfSibling = " + info);}
+
+        }
+        else{
+            System.out.println("an element with tostring= " + el.toString() + " wasn't founded. getTextOfSibling = " + info);
+        }
+        return "None";
+    }
+
 
     String getTextOfSiblingsText(String text, String pathToSibling, String info){
         String xPath = "//*[contains(text(),'" + text + "')]";
